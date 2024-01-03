@@ -42,6 +42,10 @@ class CanvasDraw {
     this.ctx.rect(0, 0, this.width, this.height)
     this.ctx.fill()
   }
+
+  drawImage () {
+  }
 }
+
 
 export { CanvasDraw }
