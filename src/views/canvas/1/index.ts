@@ -2,8 +2,8 @@ class CanvasDraw {
   options = { wrap: '.canvas-wrap' }
   canvasWrap
   canvas
-  width = 1600
-  height = 900
+  width
+  height
   ctx
 
   constructor (options: any = {}) {
@@ -21,7 +21,9 @@ class CanvasDraw {
   genCanvas () {
     this.canvasWrap = document.querySelector(this.options.wrap)
     this.canvas = document.createElement('canvas')
-    // const { clientWidth, clientHeight } = document.documentElement
+    const { clientWidth, clientHeight } = document.documentElement
+    this.width = clientWidth
+    this.height = clientHeight
     this.canvas.width = this.width
     this.canvas.height = this.height
     this.canvas.style.display = 'block'
