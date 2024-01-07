@@ -117,13 +117,13 @@ class CanvasDrawMain {
     let allLineHeight = 0
     this.options.mainTexts.forEach((text, index) => {
       obj[`fontSize${index}`] = (this.width - this.padding * 2) / text.length
-      obj[`lineHeight${index}`] = obj[`fontSize${index}`] * 2
+      obj[`lineHeight${index}`] = obj[`fontSize${index}`] * 1.6
       allLineHeight += obj[`lineHeight${index}`]
     })
 
     this.ctx.save()
     const w = this.width - this.padding
-    const h = allLineHeight
+    const h = allLineHeight + this.padding / 2
     const x = this.padding / 2
     const y = this.centerY - h / 2
     const r = Math.min(w, allLineHeight) / 10
@@ -154,7 +154,7 @@ class CanvasDrawMain {
   }
 
   drawMask () {
-    this.canvasDrawMask = new CanvasDrawMask(this.options)
+    // this.canvasDrawMask = new CanvasDrawMask(this.options)
   }
 
   clearTimersAndEvents () {
