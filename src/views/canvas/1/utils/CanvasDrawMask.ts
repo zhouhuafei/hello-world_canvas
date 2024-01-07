@@ -117,8 +117,11 @@ class CanvasDrawMask {
     let i = 0
     let x = 0
     let y = 0
-    const w = 10
-    const h = 10
+    const allArea = this.width * this.height
+    // requestAnimationFrame 每秒绘制60次 1分钟就是3600次
+    const oneArea = allArea / (60 * 60)
+    const w = Math.sqrt(oneArea)
+    const h = w
     const removeMaskTrigger = () => {
       console.log('removeMaskTrigger：')
 
