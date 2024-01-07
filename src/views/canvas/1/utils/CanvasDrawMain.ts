@@ -154,7 +154,7 @@ class CanvasDrawMain {
   }
 
   drawMask () {
-    // this.canvasDrawMask = new CanvasDrawMask(this.options)
+    this.canvasDrawMask = new CanvasDrawMask(this.options)
   }
 
   clearTimersAndEvents () {
