@@ -8,7 +8,7 @@ import { CanvasDrawPage } from './index.ts'
 
 let canvasDrawPage
 onMounted(() => (canvasDrawPage = new CanvasDrawPage()))
-onUnmounted(() => canvasDrawPage && canvasDrawPage.clearTimersAndEvents())
+onUnmounted(() => canvasDrawPage.clearTimersAndEvents && canvasDrawPage.clearTimersAndEvents())
 </script>
 
 <style scoped lang="scss"></style>
