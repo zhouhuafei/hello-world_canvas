@@ -7,8 +7,8 @@ class CanvasDrawPage {
       mainBgImageUrl: new URL('./images/mainBg.png', import.meta.url).href,
       mainBgAudioUrl: new URL('./audios/mainBg.mp3', import.meta.url).href,
       mainTexts: [
-        `请保持心中的善良，因为你不知道，谁会借着你的善良，走出绝望。`,
-        `请保持你心中的信仰，因为你不知道谁会借着你的信仰，走出迷茫。`
+        `能说服一个人的，从来不是道理，而是南墙。`,
+        `能点醒一个人的，从来不是说教，而是磨难。`
       ],
       maskBgImageUrl: new URL('./images/maskBg.png', import.meta.url).href
     })
