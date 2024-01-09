@@ -1,6 +1,16 @@
 import canvasApi from 'zhf.canvas-api'
 import { CanvasDrawMask } from '@/views/canvas/1/utils/CanvasDrawMask'
 
+let self
+const onKeyDownTrigger = async (e) => {
+  console.log('e.keyCode：', e.keyCode)
+  if (e.keyCode !== 32) return
+  for (let i = self.options.maskNum; i > 0; i--) {
+    await self[`canvasDrawMask${i}`].draw()
+    await self[`canvasDrawMask${i}`].removeMask()
+  }
+}
+
 class CanvasDrawMain {
   options: any = { wrap: '.ui-canvas-wrap' }
   canvasWrap
@@ -11,7 +21,6 @@ class CanvasDrawMain {
   centerX
   centerY
   ctx
-  canvasDrawMask
   imgBak1
 
   constructor (options: any = {}) {
@@ -21,10 +30,11 @@ class CanvasDrawMain {
     window.addEventListener('resize', () => this.init())
   }
 
-  init () {
+  async init () {
     this.genCanvas()
     this.genCtx()
-    this.draw()
+    await this.draw()
+    this.addOnKeyDown()
   }
 
   genCanvas () {
@@ -154,11 +164,25 @@ class CanvasDrawMain {
   }
 
   removeMask () {
-    this.canvasDrawMask = new CanvasDrawMask(this.options)
+    for (let i = 1; i <= this.options.maskNum; i++) {
+      this[`canvasDrawMask${i}`] = new CanvasDrawMask({
+        ...this.options,
+        maskBgImageUrl: this.options[`maskBg${i}ImageUrl`]
+      })
+    }
+  }
+
+  addOnKeyDown () {
+    self = this
+    document.removeEventListener('keydown', onKeyDownTrigger)
+    document.addEventListener('keydown', onKeyDownTrigger)
   }
 
   clearTimersAndEvents () {
-    this.canvasDrawMask.clearTimersAndEvents()
+    for (let i = 1; i <= this.options.maskNum; i++) {
+      this[`canvasDrawMask${i}`].clearTimers()
+    }
+    document.removeEventListener('keydown', onKeyDownTrigger)
   }
 }
 

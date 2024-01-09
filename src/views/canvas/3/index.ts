@@ -1,4 +1,4 @@
-import { CanvasDrawMain } from '@/views/canvas/3/utils/CanvasDrawMain'
+import { CanvasDrawMain } from '@/views/canvas/1/utils/CanvasDrawMain'
 
 class CanvasDrawPage {
   constructor (options: any = {}) {
@@ -17,7 +17,8 @@ class CanvasDrawPage {
       maskBg2ImageUrl: new URL('./images/maskBg2.png', import.meta.url).href,
       maskBg3ImageUrl: new URL('./images/maskBg3.png', import.meta.url).href,
       maskBg4ImageUrl: new URL('./images/maskBg4.png', import.meta.url).href,
-      maskBg5ImageUrl: new URL('./images/maskBg5.png', import.meta.url).href
+      maskBg5ImageUrl: new URL('./images/maskBg5.png', import.meta.url).href,
+      maskNum: 5
     })
   }
 }

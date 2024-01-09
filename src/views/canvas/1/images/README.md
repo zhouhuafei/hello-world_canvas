@@ -1,4 +1,4 @@
-#### 网址
+#### 文生图
 https://vegaai.net/text2Image
 
 #### mainBg.png

@@ -10,7 +10,8 @@ class CanvasDrawPage {
         `能说服一个人的，从来不是道理，而是南墙`,
         `能点醒一个人的，从来不是说教，而是磨难`
       ],
-      maskBgImageUrl: new URL('./images/maskBg.png', import.meta.url).href
+      maskBg1ImageUrl: new URL('./images/maskBg.png', import.meta.url).href,
+      maskNum: 1
     })
   }
 }
