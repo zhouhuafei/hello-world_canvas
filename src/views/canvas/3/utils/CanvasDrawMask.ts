@@ -1,11 +1,3 @@
-let self
-const onKeyDownTrigger = async (e) => {
-  console.log('e.keyCode：', e.keyCode)
-  if (e.keyCode !== 32) return
-  await self.draw()
-  self.removeMask()
-}
-
 class CanvasDrawMask {
   options: any = { wrap: '.ui-canvas-wrap' }
   canvasWrap
@@ -29,7 +21,6 @@ class CanvasDrawMask {
     this.genCtx()
     this.genAudios()
     await this.draw()
-    this.addOnKeyDown()
   }
 
   genCanvas () {
@@ -119,8 +110,8 @@ class CanvasDrawMask {
       let x = 0
       let y = 0
       const allArea = this.width * this.height
-      // requestAnimationFrame 每秒绘制60次 1分钟就是3600次
-      const oneArea = allArea / (60 * 60)
+      // requestAnimationFrame 每秒绘制60次 1分钟就是3600次 绘制maskNum张mask
+      const oneArea = allArea / ((60 * 60) / this.options.maskNum)
       const w = Math.sqrt(oneArea)
       const h = w
       const removeMaskTrigger = () => {
@@ -149,15 +140,8 @@ class CanvasDrawMask {
     })
   }
 
-  addOnKeyDown () {
-    self = this
-    document.removeEventListener('keydown', onKeyDownTrigger)
-    document.addEventListener('keydown', onKeyDownTrigger)
-  }
-
-  clearTimersAndEvents () {
+  clearTimers () {
     cancelAnimationFrame(this.timer1)
-    document.removeEventListener('keydown', onKeyDownTrigger)
   }
 }
 
