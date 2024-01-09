@@ -7,7 +7,7 @@ const onKeyDownTrigger = async (e) => {
   if (e.keyCode !== 32) return
   for (let i = self.options.maskNum; i > 0; i--) {
     await self[`canvasDrawMask${i}`].draw()
-    await self[`canvasDrawMask${i}`].removeMask()
+    await self[`canvasDrawMask${i}`].runMaskTransparent()
   }
 }
 
@@ -62,7 +62,7 @@ class CanvasDrawMain {
     await this.drawBgImage()
     // this.drawGuideLine()
     this.drawText()
-    this.removeMask()
+    this.drawMask()
   }
 
   clear () {
@@ -163,7 +163,7 @@ class CanvasDrawMain {
     this.ctx.restore()
   }
 
-  removeMask () {
+  drawMask () {
     for (let i = 1; i <= this.options.maskNum; i++) {
       this[`canvasDrawMask${i}`] = new CanvasDrawMask({
         ...this.options,

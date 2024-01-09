@@ -97,7 +97,7 @@ class CanvasDrawMask {
     }
   }
 
-  removeMask () {
+  runMaskTransparent () {
     return new Promise(resolve => {
       cancelAnimationFrame(this.timer1)
       // 源图像 = 您打算放置到画布上的绘图
