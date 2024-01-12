@@ -125,7 +125,7 @@ class CanvasDrawMain {
     const obj: any = {}
     let allLineHeight = 0
     this.options.mainTexts.forEach((text, index) => {
-      const prefectWordLength = 28 // 16比9的分辨率：一行展示28个字效果最佳
+      const prefectWordLength = 14 // 16比9的分辨率：一行展示28个字效果最佳
       obj[`fontSize${index}`] = (this.width - this.padding * 2) / prefectWordLength
       obj[`lineHeight${index}`] = obj[`fontSize${index}`] * 1.6
       allLineHeight += obj[`lineHeight${index}`]
