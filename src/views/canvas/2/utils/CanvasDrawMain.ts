@@ -15,7 +15,7 @@ class CanvasDrawMain {
   centerX
   centerY
   ctx
-  audioMax = 1
+  audioMax
   audios: any = []
   timer1
   angle = 0
@@ -48,6 +48,7 @@ class CanvasDrawMain {
     this.canvas.height = this.height
     this.canvas.style.display = 'block'
     this.canvasWrap.appendChild(this.canvas)
+    this.audioMax = this.options.mainBgAudioUrls.length * 2
   }
 
   genCtx () {
@@ -80,17 +81,12 @@ class CanvasDrawMain {
     this.ctx.save()
     this.ctx.beginPath()
 
-    this.ctx.translate(this.centerX, this.centerY)
-    // this.ctx.rotate(this.angle * Math.PI / 180)
-
-    const lineWidth = 1
-    this.ctx.lineWidth = lineWidth
     this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
-    this.ctx.setLineDash([lineWidth, lineWidth])
-    this.ctx.moveTo(-this.centerX, 0)
-    this.ctx.lineTo(this.centerX, 0)
-    this.ctx.moveTo(0, -this.centerY)
-    this.ctx.lineTo(0, this.centerY)
+    this.ctx.setLineDash([1, 1])
+    this.ctx.moveTo(0, this.centerY)
+    this.ctx.lineTo(this.width, this.centerY)
+    this.ctx.moveTo(this.centerX, 0)
+    this.ctx.lineTo(this.centerX, this.height)
     this.ctx.stroke()
 
     this.ctx.closePath()
@@ -106,8 +102,9 @@ class CanvasDrawMain {
   }
 
   genAudios () {
+    const mainBgAudioNum = this.options.mainBgAudioUrls.length
     for (let i = 0; i < this.audioMax; i++) {
-      const audio = this.genAudioInfo(this.options.mainBgAudioUrl)
+      const audio = this.genAudioInfo(this.options.mainBgAudioUrls[i % mainBgAudioNum])
       this.audios.push(audio)
     }
   }
@@ -122,10 +119,8 @@ class CanvasDrawMain {
     const bigArcX = 0
     const bigArcY = 0
     const bigArcR = this.centerY * 0.9
-    const lineWidth = Math.min(this.width, this.height) / 100
-    this.ctx.lineWidth = lineWidth
+    this.ctx.lineWidth = Math.min(this.width, this.height) / 100
     this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
-    this.ctx.setLineDash([lineWidth, lineWidth])
     this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360)
     this.ctx.stroke()
     this.ctx.closePath()
@@ -149,10 +144,9 @@ class CanvasDrawMain {
       cancelAnimationFrame(this.timer1)
       this.timer1 = requestAnimationFrame(() => {
         this.angle += i
-        if (this.angle % 10 === 0) {
+        if (this.angle % 60 === 0) {
           i++
-          console.log('======i', i, this.angle % 360)
-          // this.audios[i % this.audioMax].play()
+          this.audios[i % this.audioMax].play()
         }
         this.draw()
         if (i >= 720) {

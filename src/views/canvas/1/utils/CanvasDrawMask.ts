@@ -5,7 +5,7 @@ class CanvasDrawMask {
   width
   height
   ctx
-  audioMax = 1
+  audioMax
   audios: any = []
   imgBak1
   timer1
@@ -33,6 +33,7 @@ class CanvasDrawMask {
     this.canvas.height = this.height
     this.canvas.setAttribute('style', 'display:block;position:absolute;left:0;top:0;')
     this.canvasWrap.appendChild(this.canvas)
+    this.audioMax = this.options.mainBgAudioUrls.length * 2
   }
 
   genCtx () {
@@ -91,8 +92,9 @@ class CanvasDrawMask {
   }
 
   genAudios () {
+    const mainBgAudioNum = this.options.mainBgAudioUrls.length
     for (let i = 0; i < this.audioMax; i++) {
-      const audio = this.genAudioInfo(this.options.mainBgAudioUrl)
+      const audio = this.genAudioInfo(this.options.mainBgAudioUrls[i % mainBgAudioNum])
       this.audios.push(audio)
     }
   }
@@ -111,7 +113,8 @@ class CanvasDrawMask {
       let y = 0
       const allArea = this.width * this.height
       // requestAnimationFrame 每秒绘制60次 1分钟就是3600次 绘制maskNum张mask
-      const oneArea = allArea / ((60 * 60) / this.options.maskNum)
+      const maskNum = this.options.maskBgImageUrls.length
+      const oneArea = allArea / ((60 * 60) / maskNum)
       const w = Math.sqrt(oneArea)
       const h = w
       const removeMaskTrigger = () => {

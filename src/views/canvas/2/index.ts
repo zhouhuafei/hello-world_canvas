@@ -3,7 +3,15 @@ import { CanvasDrawMain } from '@/views/canvas/2/utils/CanvasDrawMain'
 class CanvasDrawPage {
   constructor () {
     new CanvasDrawMain({
-      mainBgAudioUrl: new URL('./audios/mainBg.mp3', import.meta.url).href
+      mainBgAudioUrls: [
+        new URL('./audios/bgm0.mp3', import.meta.url).href,
+        new URL('./audios/bgm1.mp3', import.meta.url).href,
+        new URL('./audios/bgm2.mp3', import.meta.url).href,
+        new URL('./audios/bgm3.mp3', import.meta.url).href,
+        new URL('./audios/bgm4.mp3', import.meta.url).href,
+        new URL('./audios/bgm5.mp3', import.meta.url).href,
+        new URL('./audios/bgm6.mp3', import.meta.url).href
+      ]
     })
   }
 }

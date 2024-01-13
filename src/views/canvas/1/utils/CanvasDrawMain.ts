@@ -5,7 +5,7 @@ let self
 const onKeyDownTrigger = async (e) => {
   console.log('e.keyCode：', e.keyCode)
   if (e.keyCode !== 32) return
-  for (let i = self.options.maskNum; i > 0; i--) {
+  for (let i = self.options.maskBgImageUrls.length - 1; i >= 0; i--) {
     await self[`canvasDrawMask${i}`].draw()
     await self[`canvasDrawMask${i}`].runMaskTransparent()
   }
@@ -164,10 +164,10 @@ class CanvasDrawMain {
   }
 
   drawMask () {
-    for (let i = 1; i <= this.options.maskNum; i++) {
+    for (let i = 0; i < this.options.maskBgImageUrls.length; i++) {
       this[`canvasDrawMask${i}`] = new CanvasDrawMask({
         ...this.options,
-        maskBgImageUrl: this.options[`maskBg${i}ImageUrl`]
+        maskBgImageUrl: this.options.maskBgImageUrls[i]
       })
     }
   }
@@ -179,7 +179,7 @@ class CanvasDrawMain {
   }
 
   clearTimersAndEvents () {
-    for (let i = 1; i <= this.options.maskNum; i++) {
+    for (let i = 0; i < this.options.maskBgImageUrls.length; i++) {
       this[`canvasDrawMask${i}`].clearTimers()
     }
     document.removeEventListener('keydown', onKeyDownTrigger)
