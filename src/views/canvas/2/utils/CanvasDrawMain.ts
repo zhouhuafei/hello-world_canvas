@@ -96,6 +96,7 @@ class CanvasDrawMain {
   genAudioInfo (src) {
     const audio = document.createElement('audio')
     // audio video 无onLoad事件
+    // audio.innerHTML = `<source src="${src}">`
     audio.src = src
     audio.preload = 'auto'
     return audio
@@ -146,6 +147,7 @@ class CanvasDrawMain {
         this.angle += i
         if (this.angle % 60 === 0) {
           i++
+          console.log(this.audios[i % this.audioMax])
           this.audios[i % this.audioMax].play()
         }
         this.draw()
