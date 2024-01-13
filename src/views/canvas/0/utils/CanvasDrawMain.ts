@@ -1,5 +1,5 @@
 import canvasApi from 'zhf.canvas-api'
-import { CanvasDrawMask } from '@/views/canvas/1/utils/CanvasDrawMask'
+import { CanvasDrawMask } from '@/views/canvas/0/utils/CanvasDrawMask'
 
 let self
 const onKeyDownTrigger = async (e) => {

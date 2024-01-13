@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: '/canvas/1'
+      redirect: '/canvas/0'
     },
     {
       path: '/canvas',
