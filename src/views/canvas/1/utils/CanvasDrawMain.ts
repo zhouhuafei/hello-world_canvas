@@ -141,7 +141,7 @@ class CanvasDrawMain {
   moveArc () {
     cancelAnimationFrame(this.timer1)
 
-    let i = 0
+    let i = 1
     this.angle = 0
 
     const changAngleTrigger = () => {
@@ -149,7 +149,7 @@ class CanvasDrawMain {
         console.log('changAngleTrigger：')
         this.angle += i
         if (this.angle % 20 === 0) {
-          // this.audios[i % this.audioMax].play()
+          this.audios[(i - 1) % this.audioMax].play()
           i++
         }
         this.draw()
