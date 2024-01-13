@@ -48,7 +48,7 @@ class CanvasDrawMain {
     this.canvas.height = this.height
     this.canvas.style.display = 'block'
     this.canvasWrap.appendChild(this.canvas)
-    this.audioMax = this.options.mainBgAudioUrls.length * 6
+    this.audioMax = this.options.mainBgAudioUrls.length * 10
   }
 
   genCtx () {

@@ -33,7 +33,7 @@ class CanvasDrawMask {
     this.canvas.height = this.height
     this.canvas.setAttribute('style', 'display:block;position:absolute;left:0;top:0;')
     this.canvasWrap.appendChild(this.canvas)
-    this.audioMax = this.options.mainBgAudioUrls.length * 6
+    this.audioMax = this.options.mainBgAudioUrls.length * 10
   }
 
   genCtx () {

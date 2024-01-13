@@ -6,8 +6,10 @@ class CanvasDrawPage {
       ...options,
       mainBgImageUrl: new URL('./images/mainBg0.png', import.meta.url).href,
       mainBgAudioUrls: [
-        new URL('./audios/bgm0.mp3', import.meta.url).href,
-        new URL('./audios/bgm1.mp3', import.meta.url).href
+        new URL('@/assets/audios/bgm0.mp3', import.meta.url).href,
+        new URL('@/assets/audios/bgm1.mp3', import.meta.url).href,
+        new URL('@/assets/audios/bgm2.mp3', import.meta.url).href,
+        new URL('@/assets/audios/bgm3.mp3', import.meta.url).href
       ],
       mainTexts: [
         `请保持心中的善良，因为你不知道，谁会借着你的善良，走出绝望`,
