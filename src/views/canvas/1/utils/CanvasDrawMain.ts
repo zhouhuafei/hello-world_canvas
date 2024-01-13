@@ -148,7 +148,7 @@ class CanvasDrawMain {
       this.timer1 = requestAnimationFrame(() => {
         console.log('changAngleTrigger：')
         this.angle += i
-        if (this.angle % 60 === 0) {
+        if (this.angle % 20 === 0) {
           // this.audios[i % this.audioMax].play()
           i++
         }
