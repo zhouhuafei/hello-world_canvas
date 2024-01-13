@@ -149,7 +149,7 @@ class CanvasDrawMain {
         console.log('changAngleTrigger：')
         this.angle += i
         if (this.angle % 60 === 0) {
-          this.audios[i % this.audioMax].play()
+          // this.audios[i % this.audioMax].play()
           i++
         }
         this.draw()
