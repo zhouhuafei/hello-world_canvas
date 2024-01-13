@@ -33,7 +33,7 @@ class CanvasDrawMask {
     this.canvas.height = this.height
     this.canvas.setAttribute('style', 'display:block;position:absolute;left:0;top:0;')
     this.canvasWrap.appendChild(this.canvas)
-    this.audioMax = this.options.mainBgAudioUrls.length * 2
+    this.audioMax = this.options.mainBgAudioUrls.length * 6
   }
 
   genCtx () {
@@ -103,6 +103,7 @@ class CanvasDrawMask {
   runMaskTransparent () {
     return new Promise(resolve => {
       cancelAnimationFrame(this.timer1)
+
       // 源图像 = 您打算放置到画布上的绘图
       // 目标图像 = 您已经放置在画布上的绘图
       this.ctx.globalCompositeOperation = 'destination-out' // 在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
@@ -118,26 +119,30 @@ class CanvasDrawMask {
       const oneArea = allArea / ((60 * 60) / maskNum)
       const w = Math.sqrt(oneArea)
       const h = w
-      const removeMaskTrigger = () => {
-        console.log('removeMaskTrigger：')
 
-        this.ctx.rect(x, y, w, h)
-        this.ctx.fill()
-        i++
-        if (x < this.width) {
-          x += w
-        } else {
-          x = 0
-          y += h
-          this.audios[i % this.audioMax].play()
-        }
-        if (y < this.height) {
-          this.timer1 = requestAnimationFrame(removeMaskTrigger)
-        } else {
-          resolve()
-        }
+      const removeMaskTrigger = () => {
+        this.timer1 = requestAnimationFrame(() => {
+          console.log('removeMaskTrigger：')
+
+          this.ctx.rect(x, y, w, h)
+          this.ctx.fill()
+          if (x < this.width) {
+            x += w
+          } else {
+            x = 0
+            y += h
+            this.audios[i % this.audioMax].play()
+            i++
+          }
+          if (y < this.height) {
+            removeMaskTrigger()
+          } else {
+            resolve()
+          }
+        })
       }
-      this.timer1 = requestAnimationFrame(removeMaskTrigger)
+
+      removeMaskTrigger()
 
       this.ctx.closePath()
       this.ctx.restore()

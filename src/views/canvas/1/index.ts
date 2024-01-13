@@ -1,20 +1,16 @@
-import { CanvasDrawMain } from '@/views/canvas/1/utils/CanvasDrawMain'
+import { CanvasDrawMain } from '@/views/canvas/2/utils/CanvasDrawMain'
 
 class CanvasDrawPage {
-  constructor (options: any = {}) {
+  constructor () {
     new CanvasDrawMain({
-      ...options,
-      mainBgImageUrl: new URL('./images/mainBg0.png', import.meta.url).href,
       mainBgAudioUrls: [
-        new URL('./audios/bgm0.mp3', import.meta.url).href
-      ],
-      mainTexts: [
-        `请保持心中的善良，因为你不知道，谁会借着你的善良，走出绝望`,
-        `请保持你心中的信仰，因为你不知道谁会借着你的信仰，走出迷茫`
-      ],
-      maskBgImageUrls: [
-        new URL('./images/maskBg0.png', import.meta.url).href,
-        new URL('./images/maskBg1.png', import.meta.url).href
+        new URL('./audios/bgm0.mp3', import.meta.url).href,
+        new URL('./audios/bgm1.mp3', import.meta.url).href,
+        new URL('./audios/bgm2.mp3', import.meta.url).href,
+        new URL('./audios/bgm3.mp3', import.meta.url).href,
+        new URL('./audios/bgm4.mp3', import.meta.url).href,
+        new URL('./audios/bgm5.mp3', import.meta.url).href,
+        new URL('./audios/bgm6.mp3', import.meta.url).href
       ]
     })
   }

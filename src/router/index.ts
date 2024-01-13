@@ -13,14 +13,14 @@ const router = createRouter({
       name: 'canvas',
       children: [
         {
+          path: '0',
+          name: 'canvas0',
+          component: () => import('@/views/canvas/0/index.vue')
+        },
+        {
           path: '1',
           name: 'canvas1',
           component: () => import('@/views/canvas/1/index.vue')
-        },
-        {
-          path: '2',
-          name: 'canvas2',
-          component: () => import('@/views/canvas/2/index.vue')
         }
       ]
     },

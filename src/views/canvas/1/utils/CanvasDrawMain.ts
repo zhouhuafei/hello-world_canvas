@@ -1,27 +1,24 @@
-import canvasApi from 'zhf.canvas-api'
-import { CanvasDrawMask } from '@/views/canvas/1/utils/CanvasDrawMask'
-
 let self
 const onKeyDownTrigger = async (e) => {
   console.log('e.keyCode：', e.keyCode)
   if (e.keyCode !== 32) return
-  for (let i = self.options.maskBgImageUrls.length - 1; i >= 0; i--) {
-    await self[`canvasDrawMask${i}`].draw()
-    await self[`canvasDrawMask${i}`].runMaskTransparent()
-  }
+  self.draw()
+  self.moveArc()
 }
 
 class CanvasDrawMain {
   options: any = { wrap: '.ui-canvas-wrap' }
   canvasWrap
   canvas
-  padding = 40
   width
   height
   centerX
   centerY
   ctx
-  imgBak1
+  audioMax
+  audios: any = []
+  timer1
+  angle = 0
 
   constructor (options: any = {}) {
     Object.assign(this.options, options)
@@ -33,6 +30,7 @@ class CanvasDrawMain {
   async init () {
     this.genCanvas()
     this.genCtx()
+    this.genAudios()
     await this.draw()
     this.addOnKeyDown()
   }
@@ -50,19 +48,18 @@ class CanvasDrawMain {
     this.canvas.height = this.height
     this.canvas.style.display = 'block'
     this.canvasWrap.appendChild(this.canvas)
+    this.audioMax = this.options.mainBgAudioUrls.length * 6
   }
 
   genCtx () {
     this.ctx = this.canvas.getContext('2d')
   }
 
-  async draw () {
+  draw () {
     this.clear()
     this.drawBgColor()
-    await this.drawBgImage()
     // this.drawGuideLine()
-    this.drawText()
-    this.drawMask()
+    this.drawArc()
   }
 
   clear () {
@@ -96,80 +93,75 @@ class CanvasDrawMain {
     this.ctx.restore()
   }
 
-  getImageInfo (src) {
-    return new Promise(resolve => {
-      const img = document.createElement('img')
-      img.src = src
-      img.onload = () => resolve(img)
-    })
+  genAudioInfo (src) {
+    const audio = document.createElement('audio')
+    // audio video 无onLoad事件
+    // audio.innerHTML = `<source src="${src}">`
+    audio.src = src
+    audio.preload = 'auto'
+    return audio
   }
 
-  async drawBgImage () {
-    let img
-    if (this.imgBak1) {
-      img = this.imgBak1
-    } else {
-      img = await this.getImageInfo(this.options.mainBgImageUrl)
-      this.imgBak1 = img
+  genAudios () {
+    const mainBgAudioNum = this.options.mainBgAudioUrls.length
+    for (let i = 0; i < this.audioMax; i++) {
+      const audio = this.genAudioInfo(this.options.mainBgAudioUrls[i % mainBgAudioNum])
+      this.audios.push(audio)
     }
-    this.ctx.drawImage(img, 0, 0, this.width, this.height)
   }
 
-  drawText () {
+  drawArc () {
     this.ctx.save()
+
+    this.ctx.translate(this.centerX, this.centerY)
+    this.ctx.rotate(this.angle * Math.PI / 180)
+
     this.ctx.beginPath()
+    const bigArcX = 0
+    const bigArcY = 0
+    const bigArcR = this.centerY * 0.9
+    this.ctx.lineWidth = Math.min(this.width, this.height) / 100
+    this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
+    this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360)
+    this.ctx.stroke()
+    this.ctx.closePath()
 
-    this.ctx.textAlign = 'center'
-    this.ctx.fillStyle = 'rgba(255,255,255,0.8)'
-
-    const obj: any = {}
-    let allLineHeight = 0
-    this.options.mainTexts.forEach((text, index) => {
-      const prefectWordLength = 28 // 16比9的分辨率：一行展示28个字效果最佳
-      obj[`fontSize${index}`] = (this.width - this.padding * 2) / prefectWordLength
-      obj[`lineHeight${index}`] = obj[`fontSize${index}`] * 1.6
-      allLineHeight += obj[`lineHeight${index}`]
-    })
-
-    this.ctx.save()
-    const w = this.width - this.padding
-    const h = allLineHeight + this.padding / 2
-    const x = this.padding / 2
-    const y = this.centerY - h / 2
-    const r = Math.min(w, allLineHeight) / 10
-    canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
-    this.ctx.fillStyle = 'rgba(0,0,0,0.4)'
-    this.ctx.fill()
-    this.ctx.restore()
-
-    this.options.mainTexts.forEach((text, index) => {
-      if (index === 0) {
-        obj[`y${index}`] = this.centerY - allLineHeight / 2
-      } else {
-        obj[`y${index}`] = obj[`y${index - 1}`] + obj[`lineHeight${index - 1}`]
-      }
-      canvasApi.drawMoreLineText({
-        ctx: this.ctx,
-        text,
-        fontSize: obj[`fontSize${index}`],
-        lineWidth: this.width,
-        lineHeight: obj[`lineHeight${index}`],
-        x: this.centerX,
-        y: obj[`y${index}`]
-      })
-    })
+    this.ctx.beginPath()
+    const smallArcX = bigArcX
+    const smallArcY = bigArcY + bigArcR / 2
+    const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+    this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360)
+    this.ctx.stroke()
+    this.ctx.closePath()
 
     this.ctx.closePath()
     this.ctx.restore()
   }
 
-  drawMask () {
-    for (let i = 0; i < this.options.maskBgImageUrls.length; i++) {
-      this[`canvasDrawMask${i}`] = new CanvasDrawMask({
-        ...this.options,
-        maskBgImageUrl: this.options.maskBgImageUrls[i]
+  moveArc () {
+    cancelAnimationFrame(this.timer1)
+
+    let i = 0
+    this.angle = 0
+
+    const changAngleTrigger = () => {
+      this.timer1 = requestAnimationFrame(() => {
+        console.log('changAngleTrigger：')
+        this.angle += i
+        if (this.angle % 60 === 0) {
+          this.audios[i % this.audioMax].play()
+          i++
+        }
+        this.draw()
+        if (i >= 720) {
+          cancelAnimationFrame(this.timer1)
+        } else {
+          changAngleTrigger()
+        }
       })
     }
+
+    changAngleTrigger()
   }
 
   addOnKeyDown () {
@@ -179,9 +171,7 @@ class CanvasDrawMain {
   }
 
   clearTimersAndEvents () {
-    for (let i = 0; i < this.options.maskBgImageUrls.length; i++) {
-      this[`canvasDrawMask${i}`].clearTimers()
-    }
+    cancelAnimationFrame(this.timer1)
     document.removeEventListener('keydown', onKeyDownTrigger)
   }
 }
