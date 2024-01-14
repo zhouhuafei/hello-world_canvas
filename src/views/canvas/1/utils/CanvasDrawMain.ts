@@ -141,11 +141,13 @@ class CanvasDrawMain {
   // 判断旋转方向
   rotateDir (angle) {
     let str = '相对静止'
-    if (angle % 60 !== 0) {
+    const criticalValue = 45 // criticalValue是旋转角度的临界值 发现每帧的旋转角度低于这个值时 视觉效果上体现出来的 全是顺时针旋转
+    if (angle >= criticalValue && 360 % angle === 0) return str
+    if (angle % criticalValue !== 0) {
       let num = Math.floor(360 / angle)
       if (num < 2) num = 2
       const three = angle * (num + 1) % 360
-      if (three >= angle) {
+      if (three > angle || angle < criticalValue) {
         str = '顺时针旋转'
       } else {
         str = '逆时针旋转'
@@ -165,16 +167,20 @@ class CanvasDrawMain {
       this.timer1 = requestAnimationFrame(() => {
         console.log('changAngleTrigger：')
         x++
-        this.angle += i
+        const temp = 51
+        console.log(this.rotateDir(temp))
+        this.angle += temp
         this.angle %= 360
-        if (x % 10 === 0) {
-          this.audios[x % this.audioMax].play()
-          i++
-        }
+        // if (x % 10 === 0) {
+        //   this.audios[x % this.audioMax].play()
+        //   i++
+        // }
+        // this.draw()
+        // if (i < 720) {
+        //   changAngleTrigger()
+        // }
         this.draw()
-        if (i < 720) {
-          changAngleTrigger()
-        }
+        changAngleTrigger()
       })
     }
 
