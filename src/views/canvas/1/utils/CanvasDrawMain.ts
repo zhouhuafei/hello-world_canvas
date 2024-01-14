@@ -151,7 +151,6 @@ class CanvasDrawMain {
         str = '逆时针旋转'
       }
     }
-    console.log(str)
     return str
   }
 
@@ -168,7 +167,7 @@ class CanvasDrawMain {
         x++
         this.angle += i
         this.angle %= 360
-        this.rotateDir(this.angle)
+        console.log(i, this.rotateDir(this.angle))
         if (x % 10 === 0) {
           this.audios[x % this.audioMax].play()
           i++
