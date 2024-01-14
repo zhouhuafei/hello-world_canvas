@@ -167,7 +167,6 @@ class CanvasDrawMain {
         x++
         this.angle += i
         this.angle %= 360
-        console.log(this.angle, this.rotateDir(this.angle))
         if (x % 10 === 0) {
           this.audios[x % this.audioMax].play()
           i++
