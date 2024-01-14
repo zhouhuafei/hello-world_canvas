@@ -1,6 +1,6 @@
 let self
 const onKeyDownTrigger = async (e) => {
-  // console.log('e.keyCode：', e.keyCode)
+  console.log('e.keyCode：', e.keyCode)
   if (e.keyCode !== 32) return
   self.draw()
   self.moveArc()
@@ -164,11 +164,11 @@ class CanvasDrawMain {
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
-        // console.log('changAngleTrigger：')
+        console.log('changAngleTrigger：')
         x++
         this.angle += i
         this.angle %= 360
-        // this.rotateDir(this.angle)
+        this.rotateDir(this.angle)
         if (x % 10 === 0) {
           this.audios[x % this.audioMax].play()
           i++
@@ -177,8 +177,6 @@ class CanvasDrawMain {
         if (i < 720) {
           changAngleTrigger()
         }
-        // this.draw()
-        // changAngleTrigger()
       })
     }
 
