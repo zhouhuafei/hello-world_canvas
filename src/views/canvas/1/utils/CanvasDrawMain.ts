@@ -140,19 +140,15 @@ class CanvasDrawMain {
 
   // 判断旋转方向
   rotateDir (angle) {
-    let str = ''
-    if (angle % 60 === 0) {
-      str = '相对静止'
-    } else {
+    let str = '相对静止'
+    if (angle % 60 !== 0) {
       let num = Math.floor(360 / angle)
       if (num < 2) num = 2
       const three = angle * (num + 1) % 360
-      if (three < angle) {
-        str = '逆时针旋转'
-      } else if (three > angle) {
+      if (three >= angle) {
         str = '顺时针旋转'
       } else {
-        str = '相对静止'
+        str = '逆时针旋转'
       }
     }
     console.log(str)
@@ -181,6 +177,8 @@ class CanvasDrawMain {
         if (i < 720) {
           changAngleTrigger()
         }
+        // this.draw()
+        // changAngleTrigger()
       })
     }
 
