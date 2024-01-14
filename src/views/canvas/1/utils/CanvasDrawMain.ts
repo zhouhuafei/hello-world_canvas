@@ -1,6 +1,6 @@
 let self
 const onKeyDownTrigger = async (e) => {
-  console.log('e.keyCode：', e.keyCode)
+  // console.log('e.keyCode：', e.keyCode)
   if (e.keyCode !== 32) return
   self.draw()
   self.moveArc()
@@ -138,24 +138,47 @@ class CanvasDrawMain {
     this.ctx.restore()
   }
 
+  // 判断旋转方向
+  rotateDir (angle) {
+    let str = ''
+    if (angle % 60 === 0) {
+      str = '相对静止'
+    } else {
+      let num = Math.floor(360 / angle)
+      if (num < 2) num = 2
+      const three = angle * (num + 1) % 360
+      if (three < angle) {
+        str = '逆时针旋转'
+      } else if (three > angle) {
+        str = '顺时针旋转'
+      } else {
+        str = '相对静止'
+      }
+    }
+    console.log(str)
+    return str
+  }
+
   moveArc () {
     cancelAnimationFrame(this.timer1)
 
+    let x = 0
     let i = 1
     this.angle = 0
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
-        console.log('changAngleTrigger：')
+        // console.log('changAngleTrigger：')
+        x++
         this.angle += i
-        if (this.angle % 20 === 0) {
-          this.audios[(i - 1) % this.audioMax].play()
+        this.angle %= 360
+        // this.rotateDir(this.angle)
+        if (x % 10 === 0) {
+          this.audios[x % this.audioMax].play()
           i++
         }
         this.draw()
-        if (i >= 720) {
-          cancelAnimationFrame(this.timer1)
-        } else {
+        if (i < 720) {
           changAngleTrigger()
         }
       })
