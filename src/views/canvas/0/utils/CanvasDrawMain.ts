@@ -117,7 +117,6 @@ class CanvasDrawMain {
 
   drawText () {
     this.ctx.save()
-    this.ctx.beginPath()
 
     this.ctx.textAlign = 'center'
     this.ctx.fillStyle = 'rgba(255,255,255,0.8)'
@@ -137,8 +136,10 @@ class CanvasDrawMain {
     const x = this.padding / 2
     const y = this.centerY - h / 2
     const r = Math.min(w, allLineHeight) / 10
-    canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
     this.ctx.fillStyle = 'rgba(0,0,0,0.4)'
+    this.ctx.beginPath()
+    canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
+    this.ctx.closePath()
     this.ctx.fill()
     this.ctx.restore()
 
@@ -159,7 +160,6 @@ class CanvasDrawMain {
       })
     })
 
-    this.ctx.closePath()
     this.ctx.restore()
   }
 
