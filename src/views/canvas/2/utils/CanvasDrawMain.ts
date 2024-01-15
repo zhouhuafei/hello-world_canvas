@@ -116,55 +116,55 @@ class CanvasDrawMain {
     this.ctx.translate(this.centerX, this.centerY)
     this.ctx.rotate(this.angle * Math.PI / 180)
 
-    this.ctx.beginPath()
     const bigArcX = 0
     const bigArcY = 0
     const bigArcR = this.centerY * 0.9
     this.ctx.lineWidth = Math.min(this.width, this.height) / 100
     this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
     // this.ctx.setLineDash([this.ctx.lineWidth, this.ctx.lineWidth])
+    // this.ctx.beginPath()
     // this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360)
+    // this.ctx.closePath()
     // this.ctx.stroke()
-    this.ctx.closePath()
 
     {
-      this.ctx.beginPath()
       const smallArcX = bigArcX
       const smallArcY = bigArcY + bigArcR / 2
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+      this.ctx.beginPath()
       this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
-      this.ctx.stroke()
       this.ctx.closePath()
+      this.ctx.stroke()
     }
 
     {
-      this.ctx.beginPath()
       const smallArcX = bigArcX
       const smallArcY = bigArcY - bigArcR / 2
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+      this.ctx.beginPath()
       this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
-      this.ctx.stroke()
       this.ctx.closePath()
+      this.ctx.stroke()
     }
 
     {
-      this.ctx.beginPath()
       const smallArcX = bigArcX + bigArcR / 2
       const smallArcY = bigArcY
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+      this.ctx.beginPath()
       this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
-      this.ctx.stroke()
       this.ctx.closePath()
+      this.ctx.stroke()
     }
 
     {
-      this.ctx.beginPath()
       const smallArcX = bigArcX - bigArcR / 2
       const smallArcY = bigArcY
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+      this.ctx.beginPath()
       this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
-      this.ctx.stroke()
       this.ctx.closePath()
+      this.ctx.stroke()
     }
 
     this.ctx.closePath()
