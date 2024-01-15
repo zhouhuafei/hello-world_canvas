@@ -73,9 +73,8 @@ class CanvasDrawMain {
     this.ctx.save()
 
     this.ctx.beginPath()
-    this.ctx.rect(0, 0, this.width, this.height)
+    this.ctx.fillRect(0, 0, this.width, this.height)
     this.ctx.closePath()
-    this.ctx.fill()
 
     this.ctx.restore()
   }
