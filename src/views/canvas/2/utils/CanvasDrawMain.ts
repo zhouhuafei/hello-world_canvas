@@ -122,8 +122,8 @@ class CanvasDrawMain {
     const bigArcR = this.centerY * 0.9
     this.ctx.lineWidth = Math.min(this.width, this.height) / 100
     this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
-    this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360)
-    this.ctx.stroke()
+    // this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360)
+    // this.ctx.stroke()
     this.ctx.closePath()
 
     this.ctx.beginPath()
