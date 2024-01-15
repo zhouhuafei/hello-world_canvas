@@ -82,17 +82,17 @@ class CanvasDrawMain {
 
   drawGuideLine () {
     this.ctx.save()
-    this.ctx.beginPath()
 
     this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
     this.ctx.setLineDash([1, 1])
+    this.ctx.beginPath()
     this.ctx.moveTo(0, this.centerY)
     this.ctx.lineTo(this.width, this.centerY)
     this.ctx.moveTo(this.centerX, 0)
     this.ctx.lineTo(this.centerX, this.height)
+    this.ctx.closePath()
     this.ctx.stroke()
 
-    this.ctx.closePath()
     this.ctx.restore()
   }
 
