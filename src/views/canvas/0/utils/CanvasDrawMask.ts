@@ -107,7 +107,6 @@ class CanvasDrawMask {
       // 目标图像 = 您已经放置在画布上的绘图
       this.ctx.globalCompositeOperation = 'destination-out' // 在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
       this.ctx.save()
-      this.ctx.beginPath()
 
       let i = 0
       let x = 0
@@ -116,13 +115,15 @@ class CanvasDrawMask {
       // requestAnimationFrame 每秒绘制60次 1分钟就是3600次 绘制maskNum张mask
       const maskNum = this.options.maskBgImageUrls.length
       const oneArea = allArea / ((60 * 60) / maskNum)
-      const w = Math.sqrt(oneArea)
+      const w = Math.floor(Math.sqrt(oneArea))
       const h = w
 
       const removeMaskTrigger = () => {
         this.timer1 = requestAnimationFrame(() => {
           console.log('removeMaskTrigger：')
+          this.ctx.beginPath()
           this.ctx.fillRect(x, y, w, h)
+          this.ctx.closePath()
           if (x < this.width) {
             x += w
           } else {
@@ -141,7 +142,6 @@ class CanvasDrawMask {
 
       removeMaskTrigger()
 
-      this.ctx.closePath()
       this.ctx.restore()
     })
   }
