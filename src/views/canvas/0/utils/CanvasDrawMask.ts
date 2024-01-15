@@ -108,6 +108,7 @@ class CanvasDrawMask {
       // 目标图像 = 您已经放置在画布上的绘图
       this.ctx.globalCompositeOperation = 'destination-out' // 在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
       this.ctx.save()
+      this.ctx.beginPath()
 
       let i = 0
       let x = 0
@@ -122,10 +123,7 @@ class CanvasDrawMask {
       const removeMaskTrigger = () => {
         this.timer1 = requestAnimationFrame(() => {
           console.log('removeMaskTrigger：')
-
-          this.ctx.beginPath()
           this.ctx.rect(x, y, w, h)
-          this.ctx.closePath()
           this.ctx.fill()
           if (x < this.width) {
             x += w
@@ -145,6 +143,7 @@ class CanvasDrawMask {
 
       removeMaskTrigger()
 
+      this.ctx.closePath()
       this.ctx.restore()
     })
   }
