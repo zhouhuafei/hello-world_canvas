@@ -122,7 +122,7 @@ class CanvasDrawMain {
     this.ctx.lineWidth = Math.min(this.width, this.height) / 100
     this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
     this.ctx.beginPath()
-    this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360)
+    this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
     this.ctx.closePath()
     this.ctx.stroke()
 
@@ -130,7 +130,7 @@ class CanvasDrawMain {
     const smallArcY = bigArcY + bigArcR / 2
     const smallArcR = bigArcR / 2 - this.ctx.lineWidth
     this.ctx.beginPath()
-    this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360)
+    this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
     this.ctx.closePath()
     this.ctx.stroke()
 
@@ -156,7 +156,7 @@ class CanvasDrawMain {
           i++
         }
         this.draw()
-        if (i < 720) {
+        if (i < 360) {
           changAngleTrigger()
         }
       })
