@@ -132,8 +132,9 @@ class CanvasDrawMain {
       const smallArcY = bigArcY + bigArcR / 2
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
       this.ctx.beginPath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180)
+      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
+      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180)
+      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180)
       this.ctx.closePath()
       this.ctx.stroke()
     }
@@ -143,8 +144,9 @@ class CanvasDrawMain {
       const smallArcY = bigArcY - bigArcR / 2
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
       this.ctx.beginPath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180)
+      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
+      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180)
+      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180)
       this.ctx.closePath()
       this.ctx.stroke()
     }
@@ -154,8 +156,9 @@ class CanvasDrawMain {
       const smallArcY = bigArcY
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
       this.ctx.beginPath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180)
+      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
+      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180)
+      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180)
       this.ctx.closePath()
       this.ctx.stroke()
     }
@@ -165,8 +168,9 @@ class CanvasDrawMain {
       const smallArcY = bigArcY
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
       this.ctx.beginPath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180)
+      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
+      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180)
+      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180)
       this.ctx.closePath()
       this.ctx.stroke()
     }
