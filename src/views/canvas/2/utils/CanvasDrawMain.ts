@@ -127,20 +127,12 @@ class CanvasDrawMain {
     // this.ctx.stroke()
     this.ctx.closePath()
 
-    this.ctx.beginPath()
-    const smallArcX = bigArcX
-    const smallArcY = bigArcY + bigArcR / 2
-    const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-    this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360)
-    this.ctx.stroke()
-    this.ctx.closePath()
-
     {
       this.ctx.beginPath()
-      const smallArcX = bigArcX + bigArcR / 2
-      const smallArcY = bigArcY
+      const smallArcX = bigArcX
+      const smallArcY = bigArcY + bigArcR / 2
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360)
+      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
       this.ctx.stroke()
       this.ctx.closePath()
     }
@@ -150,7 +142,17 @@ class CanvasDrawMain {
       const smallArcX = bigArcX
       const smallArcY = bigArcY - bigArcR / 2
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360)
+      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
+      this.ctx.stroke()
+      this.ctx.closePath()
+    }
+
+    {
+      this.ctx.beginPath()
+      const smallArcX = bigArcX + bigArcR / 2
+      const smallArcY = bigArcY
+      const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
       this.ctx.stroke()
       this.ctx.closePath()
     }
@@ -160,7 +162,7 @@ class CanvasDrawMain {
       const smallArcX = bigArcX - bigArcR / 2
       const smallArcY = bigArcY
       const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360)
+      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180)
       this.ctx.stroke()
       this.ctx.closePath()
     }
