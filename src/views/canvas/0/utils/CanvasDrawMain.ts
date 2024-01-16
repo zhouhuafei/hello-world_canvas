@@ -72,9 +72,7 @@ class CanvasDrawMain {
   drawBgColor () {
     this.ctx.save()
 
-    this.ctx.beginPath()
     this.ctx.fillRect(0, 0, this.width, this.height)
-    this.ctx.closePath()
 
     this.ctx.restore()
   }
