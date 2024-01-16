@@ -119,9 +119,7 @@ class CanvasDrawMask {
       const removeMaskTrigger = () => {
         this.timer1 = requestAnimationFrame(() => {
           console.log('removeMaskTrigger：')
-          this.ctx.beginPath()
           this.ctx.fillRect(x, y, w, h)
-          this.ctx.closePath()
           if (x < this.width) {
             x += w
           } else {
