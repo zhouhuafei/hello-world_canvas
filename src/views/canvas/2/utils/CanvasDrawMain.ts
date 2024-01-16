@@ -153,7 +153,7 @@ class CanvasDrawMain {
           i++
         }
         this.draw()
-        if (i < 360) {
+        if (i <= 360) {
           changAngleTrigger()
         }
       })
