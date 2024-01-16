@@ -1,4 +1,4 @@
-import { CanvasDrawMain } from '@/views/canvas/2/utils/CanvasDrawMain'
+import { CanvasDrawMain } from './utils/CanvasDrawMain'
 
 class CanvasDrawPage {
   constructor () {
