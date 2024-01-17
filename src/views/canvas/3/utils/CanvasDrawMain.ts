@@ -95,7 +95,6 @@ class CanvasDrawMain {
   genAudioInfo (src) {
     const audio = document.createElement('audio')
     // audio video 无onLoad事件
-    // audio.innerHTML = `<source src="${src}">`
     audio.src = src
     audio.preload = 'auto'
     return audio
