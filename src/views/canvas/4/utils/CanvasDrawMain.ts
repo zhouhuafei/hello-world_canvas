@@ -58,7 +58,7 @@ class CanvasDrawMain {
   draw () {
     this.clear()
     this.drawBgColor()
-    // this.drawGuideLine()
+    this.drawGuideLine()
     this.drawArc()
   }
 
@@ -78,9 +78,12 @@ class CanvasDrawMain {
     this.ctx.save()
 
     this.ctx.strokeStyle = 'rgba(0,255,0,0.4)'
-    this.ctx.setLineDash([3, 3])
+    this.ctx.setLineDash([this.width / (16 * 3 + 1)])
     this.ctx.moveTo(0, this.centerY + 0.5)
     this.ctx.lineTo(this.width, this.centerY + 0.5)
+    this.ctx.stroke()
+    this.ctx.beginPath()
+    this.ctx.setLineDash([this.height / (9 * 3)])
     this.ctx.moveTo(this.centerX + 0.5, 0)
     this.ctx.lineTo(this.centerX + 0.5, this.height)
     this.ctx.stroke()
@@ -111,76 +114,8 @@ class CanvasDrawMain {
     this.ctx.translate(this.centerX, this.centerY)
     this.ctx.rotate(this.angle * Math.PI / 180)
 
-    const bigArcX = 0
-    const bigArcY = 0
-    const bigArcR = this.centerY * 0.9
-    this.ctx.lineWidth = Math.min(this.width, this.height) / 100
-    this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
-    // this.ctx.setLineDash([this.ctx.lineWidth, this.ctx.lineWidth])
-    // this.ctx.beginPath()
-    // this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360)
-    // this.ctx.closePath()
-    // this.ctx.stroke()
-
-    {
-      const smallArcX = bigArcX
-      const smallArcY = bigArcY + bigArcR / 2
-      const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-      this.ctx.beginPath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-      // this.ctx.closePath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-      // this.ctx.closePath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-      // this.ctx.closePath()
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-      this.ctx.stroke()
-    }
-
-    {
-      const smallArcX = bigArcX
-      const smallArcY = bigArcY - bigArcR / 2
-      const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-      this.ctx.beginPath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-      // this.ctx.closePath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合外半圆
-      // this.ctx.closePath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合内半圆
-      // this.ctx.closePath()
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合内半圆
-      this.ctx.stroke()
-    }
-
-    {
-      const smallArcX = bigArcX + bigArcR / 2
-      const smallArcY = bigArcY
-      const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-      this.ctx.beginPath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-      // this.ctx.closePath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合外半圆
-      // this.ctx.closePath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合内半圆
-      // this.ctx.closePath()
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合内半圆
-      this.ctx.stroke()
-    }
-
-    {
-      const smallArcX = bigArcX - bigArcR / 2
-      const smallArcY = bigArcY
-      const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-      this.ctx.beginPath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-      // this.ctx.closePath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合外半圆
-      // this.ctx.closePath()
-      // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合内半圆
-      // this.ctx.closePath()
-      this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合内半圆
-      this.ctx.stroke()
-    }
+    // this.ctx.fillStyle = '#f00'
+    // this.ctx.fillRect(0, 0, 10, 10)
 
     this.ctx.closePath()
     this.ctx.restore()
