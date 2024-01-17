@@ -31,6 +31,11 @@ const router = createRouter({
           path: '3',
           name: 'canvas3',
           component: () => import('@/views/canvas/3/index.vue')
+        },
+        {
+          path: '4',
+          name: 'canvas4',
+          component: () => import('@/views/canvas/4/index.vue')
         }
       ]
     },
