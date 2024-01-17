@@ -148,7 +148,7 @@ class CanvasDrawMain {
       canvasApi.drawMoreLineText({
         ctx: this.ctx,
         text,
-        fontFamily: '黑体', // 黑体可以让文字正正好处于行高的正中间，其他字体多多少少都存在点肉眼可见的误差。
+        fontFamily: '黑体', // 在win系统上，黑体可以让文字正正好处于行高的正中间，其他字体多多少少都存在点肉眼可见的误差。
         fontSize: obj[`fontSize${index}`],
         lineWidth: this.width,
         lineHeight: obj[`lineHeight${index}`],
