@@ -79,11 +79,12 @@ class CanvasDrawMain {
 
     this.ctx.strokeStyle = 'rgba(0,255,0,0.4)'
     this.ctx.setLineDash([this.width / (16 * 3 + 1)])
+    this.ctx.beginPath()
     this.ctx.moveTo(0, this.centerY + 0.5)
     this.ctx.lineTo(this.width, this.centerY + 0.5)
     this.ctx.stroke()
-    this.ctx.beginPath()
     this.ctx.setLineDash([this.height / (9 * 3)])
+    this.ctx.beginPath()
     this.ctx.moveTo(this.centerX + 0.5, 0)
     this.ctx.lineTo(this.centerX + 0.5, this.height)
     this.ctx.stroke()
@@ -114,8 +115,8 @@ class CanvasDrawMain {
     this.ctx.translate(this.centerX, this.centerY)
     this.ctx.rotate(this.angle * Math.PI / 180)
 
-    // this.ctx.fillStyle = '#f00'
-    // this.ctx.fillRect(0, 0, 10, 10)
+    this.ctx.fillStyle = '#f00'
+    this.ctx.fillRect(0, 0, 10, 10)
 
     this.ctx.closePath()
     this.ctx.restore()
