@@ -59,7 +59,7 @@ class CanvasDrawMain {
     this.clear()
     this.drawBgColor()
     this.drawGuideLine()
-    this.drawArc()
+    this.drawMain()
   }
 
   clear () {
@@ -108,7 +108,7 @@ class CanvasDrawMain {
     }
   }
 
-  drawArc () {
+  drawMain () {
     // ...TODO
     // 如果一个数既能被1920整除又能被1080整除
     // 那么以这个数为边长组合出来的正方形一定能铺满全屏

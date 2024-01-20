@@ -59,7 +59,7 @@ class CanvasDrawMain {
     this.clear()
     this.drawBgColor()
     // this.drawGuideLine()
-    this.drawArc()
+    this.drawMain()
   }
 
   clear () {
@@ -108,7 +108,14 @@ class CanvasDrawMain {
     }
   }
 
-  drawArc () {
+  drawMain () {
+    // 1920x1080 竖着分4份 横着分2份 分成8块区域 中间空隙附加文案
+    const areaWH = this.width / 4
+    const middleGap = this.height / 2 - areaWH
+    this.ctx.save()
+
+    this.ctx.restore()
+
     this.ctx.save()
 
     this.ctx.translate(this.centerX, this.centerY)
