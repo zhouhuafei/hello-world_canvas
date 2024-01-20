@@ -122,7 +122,7 @@ class CanvasDrawMain {
     this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
     this.ctx.setLineDash([lineWidth, lineWidth])
     this.ctx.beginPath()
-    this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360)
+    this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
     this.ctx.closePath()
     this.ctx.stroke()
 
