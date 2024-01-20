@@ -117,7 +117,7 @@ class CanvasDrawMain {
     const lineWidth = Math.min(this.width, this.height) / 100
     const bigArcX = lineWidth * 10
     const bigArcY = 0
-    const bigArcR = this.centerY * 0.6
+    const bigArcR = this.centerY * 0.7
     this.ctx.lineWidth = lineWidth
     this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
     this.ctx.setLineDash([lineWidth, lineWidth])
@@ -126,9 +126,9 @@ class CanvasDrawMain {
     this.ctx.closePath()
     this.ctx.stroke()
 
-    const smallArcX = -bigArcX / 2
+    const smallArcR = bigArcR / 2
+    const smallArcX = bigArcX - smallArcR + lineWidth
     const smallArcY = bigArcY
-    const smallArcR = bigArcR / 2 - this.ctx.lineWidth
     this.ctx.beginPath()
     this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
     this.ctx.closePath()

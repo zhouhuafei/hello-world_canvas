@@ -776,6 +776,7 @@ class CanvasDrawMain {
       this.ctx.lineWidth = Math.min(this.width, this.height) / 100
       this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
       fns[`fn${i}`].call(this, { bigArcX: x, bigArcY: y, bigArcR: areaWH * 0.9 })
+      // fns[`fn${i}`].call(this, { bigArcX: x, bigArcY: y, bigArcR: areaWH * 0.9 })
       this.ctx.restore()
     }
   }
