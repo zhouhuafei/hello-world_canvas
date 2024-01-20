@@ -19,7 +19,7 @@ class CanvasDrawMain {
   audios: any = []
   timer1
   angle1 = 0
-  angle2 = 10
+  angle2 = 0
 
   constructor (options: any = {}) {
     Object.assign(this.options, options)
@@ -783,6 +783,7 @@ class CanvasDrawMain {
     let x = 0
     let i = 1
     this.angle1 = 0
+    this.angle2 = 10
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
