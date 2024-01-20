@@ -18,7 +18,7 @@ class CanvasDrawMain {
   audioMax
   audios: any = []
   timer1
-  angle = 0
+  angle1 = 0
 
   constructor (options: any = {}) {
     Object.assign(this.options, options)
@@ -112,7 +112,7 @@ class CanvasDrawMain {
     this.ctx.save()
 
     this.ctx.translate(this.centerX, this.centerY)
-    this.ctx.rotate(this.angle * Math.PI / 180)
+    this.ctx.rotate(this.angle1 * Math.PI / 180)
 
     const lineWidth = Math.min(this.width, this.height) / 100
     const bigArcX = lineWidth * 10
@@ -143,14 +143,14 @@ class CanvasDrawMain {
 
     let x = 0
     let i = 1
-    this.angle = 0
+    this.angle1 = 0
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
         console.log('changAngleTrigger：')
         x++
-        this.angle += 10
-        this.angle %= 360
+        this.angle1 += 10
+        this.angle1 %= 360
         if (x % 10 === 0) {
           this.audios[x % this.audioMax].play()
           i++
