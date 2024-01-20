@@ -114,11 +114,10 @@ class CanvasDrawMain {
     const row2 = 2
     const areaWH = this.width / cols
     const fns = {
-      fn1: ({ bigArcX, bigArcY, bigArcR }) => {
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+      fn1: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH * 0.7
 
         {
           const smallArcX = bigArcX
@@ -195,11 +194,10 @@ class CanvasDrawMain {
           this.ctx.stroke()
         }
       },
-      fn2: ({ bigArcX, bigArcY, bigArcR }) => {
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+      fn2: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH * 0.7
 
         {
           const smallArcX = bigArcX
@@ -276,11 +274,10 @@ class CanvasDrawMain {
           this.ctx.stroke()
         }
       },
-      fn3: ({ bigArcX, bigArcY, bigArcR }) => {
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+      fn3: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH * 0.7
 
         {
           const smallArcX = bigArcX
@@ -357,11 +354,10 @@ class CanvasDrawMain {
           this.ctx.stroke()
         }
       },
-      fn4: ({ bigArcX, bigArcY, bigArcR }) => {
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+      fn4: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH * 0.7
 
         {
           const smallArcX = bigArcX
@@ -438,11 +434,10 @@ class CanvasDrawMain {
           this.ctx.stroke()
         }
       },
-      fn5: ({ bigArcX, bigArcY, bigArcR }) => {
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+      fn5: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH * 0.7
 
         {
           const smallArcX = bigArcX
@@ -519,11 +514,10 @@ class CanvasDrawMain {
           this.ctx.stroke()
         }
       },
-      fn6: ({ bigArcX, bigArcY, bigArcR }) => {
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+      fn6: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH * 0.7
 
         {
           const smallArcX = bigArcX
@@ -600,11 +594,10 @@ class CanvasDrawMain {
           this.ctx.stroke()
         }
       },
-      fn7: ({ bigArcX, bigArcY, bigArcR }) => {
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+      fn7: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH * 0.7
 
         {
           const smallArcX = bigArcX
@@ -681,11 +674,10 @@ class CanvasDrawMain {
           this.ctx.stroke()
         }
       },
-      fn8: ({ bigArcX, bigArcY, bigArcR }) => {
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+      fn8: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH * 0.7
 
         {
           const smallArcX = bigArcX
@@ -763,20 +755,21 @@ class CanvasDrawMain {
         }
       }
     }
-    for (let i = 1; i <= cols * row2; i++) {
-      const idx = i % (cols + 1)
-      const x = idx * areaWH / 2
-      let y = idx * areaWH / 2
-      if (i > cols) {
-        y = this.height - idx * areaWH / 2
+    for (let i = 0; i < cols * row2; i++) {
+      const idx = i % cols
+      const idy = Math.floor(i / cols) + 1
+      const x = (idx + 1) * areaWH / 2 + idx * areaWH / 2
+      let y = idy * areaWH / 2
+      if (i >= cols) {
+        y = this.height - areaWH / 2
       }
       this.ctx.save()
       this.ctx.translate(x, y)
       this.ctx.rotate(this.angle * Math.PI / 180)
-      this.ctx.lineWidth = Math.min(this.width, this.height) / 100
+      this.ctx.lineWidth = areaWH / 100
       this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
-      fns[`fn${i}`].call(this, { bigArcX: x, bigArcY: y, bigArcR: areaWH * 0.9 })
-      // fns[`fn${i}`].call(this, { bigArcX: x, bigArcY: y, bigArcR: areaWH * 0.9 })
+      this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
+      fns[`fn${i + 1}`].call(this, { bigArcX: 0, bigArcY: 0, areaWH })
       this.ctx.restore()
     }
   }
