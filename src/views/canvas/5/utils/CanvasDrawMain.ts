@@ -109,44 +109,31 @@ class CanvasDrawMain {
     }
   }
 
+  drawSmallArc (smallArcX, smallArcY, smallArcR) {
+    this.ctx.beginPath()
+    this.ctx.arc(smallArcX, smallArcY, smallArcR / 2, 0, 360 * Math.PI / 180) // 4个闭合外半圆
+    this.ctx.closePath()
+    this.ctx.stroke()
+  }
+
   drawMain () {
     // 1920x1080 竖着分4份 横着分2份 分成8块区域 中间空隙附加文案
     const cols = 4
     const row2 = 2
     const areaWH = this.width / cols
     const fns = {
-      fn1: () => {
+      fn0: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH * 0.7
+        const bigArcR = areaWH / 2 * 0.9
 
         {
           const smallArcX = bigArcX
           const smallArcY = bigArcY + bigArcR / 2
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
+          this.ctx.closePath()
           this.ctx.stroke()
         }
 
@@ -155,13 +142,8 @@ class CanvasDrawMain {
           const smallArcY = bigArcY - bigArcR / 2
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
+          this.ctx.closePath()
           this.ctx.stroke()
         }
 
@@ -170,13 +152,8 @@ class CanvasDrawMain {
           const smallArcY = bigArcY
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
+          this.ctx.closePath()
           this.ctx.stroke()
         }
 
@@ -185,48 +162,78 @@ class CanvasDrawMain {
           const smallArcY = bigArcY
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+      },
+      fn1: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 0.9
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY + bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY - bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合外半圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合外半圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合外半圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          this.ctx.beginPath()
+          this.ctx.moveTo(-bigArcR / 3, 0)
+          this.ctx.lineTo(bigArcR / 3, 0)
+          this.ctx.stroke()
+          this.ctx.beginPath()
+          this.ctx.moveTo(bigArcR / 10, -bigArcR / 6)
+          this.ctx.lineTo(bigArcR / 10, bigArcR / 3)
           this.ctx.stroke()
         }
       },
       fn2: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH * 0.7
+        const bigArcR = areaWH / 2 * 0.9
 
         {
           const smallArcX = bigArcX
           const smallArcY = bigArcY + bigArcR / 2
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合外半圆
           this.ctx.stroke()
         }
 
@@ -235,13 +242,7 @@ class CanvasDrawMain {
           const smallArcY = bigArcY - bigArcR / 2
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合外半圆
           this.ctx.stroke()
         }
 
@@ -250,13 +251,7 @@ class CanvasDrawMain {
           const smallArcY = bigArcY
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合外半圆
           this.ctx.stroke()
         }
 
@@ -265,47 +260,31 @@ class CanvasDrawMain {
           const smallArcY = bigArcY
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合外半圆
+          this.ctx.stroke()
+        }
+
+        {
+          this.ctx.beginPath()
+          this.ctx.moveTo(-bigArcR / 6, 0)
+          this.ctx.lineTo(bigArcR / 6, 0)
+          this.ctx.stroke()
+          this.ctx.beginPath()
+          this.ctx.moveTo(0, -bigArcR / 6)
+          this.ctx.lineTo(0, bigArcR / 3)
           this.ctx.stroke()
         }
       },
       fn3: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH * 0.7
+        const bigArcR = areaWH / 2 * 1.4
 
         {
           const smallArcX = bigArcX
           const smallArcY = bigArcY + bigArcR / 2
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
           this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
           this.ctx.stroke()
         }
@@ -315,12 +294,6 @@ class CanvasDrawMain {
           const smallArcY = bigArcY - bigArcR / 2
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
           this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合内半圆
           this.ctx.stroke()
         }
@@ -330,12 +303,6 @@ class CanvasDrawMain {
           const smallArcY = bigArcY
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
           this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合内半圆
           this.ctx.stroke()
         }
@@ -345,12 +312,6 @@ class CanvasDrawMain {
           const smallArcY = bigArcY
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
           this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
           this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合内半圆
           this.ctx.stroke()
         }
@@ -358,102 +319,41 @@ class CanvasDrawMain {
       fn4: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH * 0.7
+        const bigArcR = areaWH / 2 * 0.9
 
         {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
         }
 
         {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
         }
 
         {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY - bigArcR / 2
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
         }
 
         {
-          const smallArcX = bigArcX + bigArcR / 2
-          const smallArcY = bigArcY
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-
-        {
-          const smallArcX = bigArcX - bigArcR / 2
-          const smallArcY = bigArcY
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+          this.ctx.strokeRect(-smallArcR / 2, -smallArcR / 2 / 2, smallArcR, smallArcR / 2)
         }
       },
       fn5: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH * 0.7
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
+        const bigArcR = areaWH / 2 * 0.9
 
         {
           const smallArcX = bigArcX
@@ -518,22 +418,7 @@ class CanvasDrawMain {
       fn6: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH * 0.7
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
+        const bigArcR = areaWH / 2 * 0.9
 
         {
           const smallArcX = bigArcX
@@ -598,102 +483,7 @@ class CanvasDrawMain {
       fn7: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH * 0.7
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY - bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-
-        {
-          const smallArcX = bigArcX + bigArcR / 2
-          const smallArcY = bigArcY
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-
-        {
-          const smallArcX = bigArcX - bigArcR / 2
-          const smallArcY = bigArcY
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
-      },
-      fn8: () => {
-        const bigArcX = 0
-        const bigArcY = 0
-        const bigArcR = areaWH * 0.7
-
-        {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
-          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
-          // this.ctx.closePath()
-          // this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合内半圆
-          // this.ctx.closePath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
-        }
+        const bigArcR = areaWH / 2 * 0.9
 
         {
           const smallArcX = bigArcX
@@ -767,12 +557,14 @@ class CanvasDrawMain {
       this.ctx.save()
       this.ctx.translate(x, y)
       let angle = this.angle1
-      if ([0, 3, 4, 7].includes(i)) angle = this.angle2
+      if ([7].includes(i)) angle = this.angle2
       this.ctx.rotate(angle * Math.PI / 180)
-      this.ctx.lineWidth = areaWH / 100
+      const lineWidth = areaWH / 100
+      this.ctx.lineWidth = lineWidth
       this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
       this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
-      fns[`fn${i + 1}`].call(this, { bigArcX: 0, bigArcY: 0, areaWH })
+      this.ctx.setLineDash([lineWidth, lineWidth])
+      fns[`fn${i}`].call(this, { bigArcX: 0, bigArcY: 0, areaWH })
       this.ctx.restore()
     }
   }
