@@ -3,7 +3,7 @@ const onKeyDownTrigger = async (e) => {
   console.log('e.keyCode：', e.keyCode)
   if (e.keyCode !== 32) return
   self.draw()
-  self.moveArc()
+  self.moveMain()
 }
 
 class CanvasDrawMain {
@@ -777,13 +777,11 @@ class CanvasDrawMain {
     }
   }
 
-  moveArc () {
+  moveMain () {
     cancelAnimationFrame(this.timer1)
 
     let x = 0
     let i = 1
-    this.angle1 = 0
-    this.angle2 = 10
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
@@ -791,6 +789,8 @@ class CanvasDrawMain {
         x++
         this.angle1 += i
         this.angle1 %= 360
+        this.angle2 += 10
+        this.angle2 %= 360
         if (x % 10 === 0) {
           this.audios[x % this.audioMax].play()
           i++
