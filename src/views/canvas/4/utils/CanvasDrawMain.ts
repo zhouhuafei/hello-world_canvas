@@ -109,6 +109,11 @@ class CanvasDrawMain {
   }
 
   drawArc () {
+    // ...TODO
+    // 如果一个数既能被1920整除又能被1080整除
+    // 那么以这个数为边长组合出来的正方形一定能铺满全屏
+    // 能被 1920x1080 整除的数：1、2、3、4、5、6、8、10、12、15、20（推荐）
+    // 能被 480x270 整除的数：1、2、3、5、6、10（推荐）、15
     this.ctx.save()
 
     this.ctx.translate(this.centerX, this.centerY)
