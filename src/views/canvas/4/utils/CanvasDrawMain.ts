@@ -114,8 +114,18 @@ class CanvasDrawMain {
     this.ctx.translate(this.centerX, this.centerY)
     this.ctx.rotate(this.angle * Math.PI / 180)
 
-    this.ctx.fillStyle = '#f00'
-    this.ctx.fillRect(0, 0, 10, 10)
+    const rows = 100
+    const cols = 100
+    const rowsW = this.width / rows
+    const rowsH = this.height / cols
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < rows; j++) {
+        this.ctx.fillStyle = (i + j) % 2 === 0 ? '#fff' : '#000'
+        const x = -this.width / 2 + i * rowsW
+        const y = -this.height / 2 + j * rowsH
+        this.ctx.fillRect(x, y, rowsW, rowsH)
+      }
+    }
 
     this.ctx.closePath()
     this.ctx.restore()
