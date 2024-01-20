@@ -109,6 +109,48 @@ class CanvasDrawMain {
   }
 
   drawMain () {
+    // 1920x1080 竖着分4份 横着分2份 分成8块区域 中间空隙附加文案
+    const cols = 4
+    const row2 = 2
+    const areaWH = this.width / cols
+    const fns = { fn1, fn2, fn3, fn4, fn5, fn6, fn7, fn8 }
+    for (let i = 1; i <= cols * row2; i++) {
+      const idx = i % (cols + 1)
+      let x = idx * areaWH / 2
+      let y = idx * areaWH / 2
+      if (i > cols) {
+        y = this.height - idx * areaWH / 2
+      }
+      this.ctx.save()
+      this.ctx.translate(x, y)
+      fns[`fn${i}`]()
+      this.ctx.restore()
+    }
+
+    function fn1 () {
+    }
+
+    function fn2 () {
+    }
+
+    function fn3 () {
+    }
+
+    function fn4 () {
+    }
+
+    function fn5 () {
+    }
+
+    function fn6 () {
+    }
+
+    function fn7 () {
+    }
+
+    function fn8 () {
+    }
+
     this.ctx.save()
 
     this.ctx.translate(this.centerX, this.centerY)

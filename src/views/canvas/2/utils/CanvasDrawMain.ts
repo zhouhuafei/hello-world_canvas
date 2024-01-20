@@ -59,7 +59,7 @@ class CanvasDrawMain {
     this.clear()
     this.drawBgColor()
     this.drawGuideLine()
-    this.drawArc()
+    this.drawMain()
   }
 
   clear () {
@@ -108,7 +108,7 @@ class CanvasDrawMain {
     }
   }
 
-  drawArc () {
+  drawMain () {
     this.ctx.save()
 
     this.ctx.translate(this.centerX, this.centerY)
