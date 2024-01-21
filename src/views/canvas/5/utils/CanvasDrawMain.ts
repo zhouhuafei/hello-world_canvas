@@ -1,4 +1,5 @@
 import canvasApi from 'zhf.canvas-api'
+import randomNum from 'zhf.random-num'
 
 let self
 const onKeyDownTrigger = async (e) => {
@@ -163,40 +164,52 @@ class CanvasDrawMain {
     // 1920x1080 竖着分4份 横着分2份 分成8块区域 中间空隙附加文案
     // 如果一个数既能被1920整除又能被1080整除
     // 那么以这个数为边长组合出来的正方形一定能铺满全屏
-    // 能被 1920x1080 整除的数：1、2、3、4、5、6、8、10（推荐）、12、15、20
-    // 能被 480x270 整除的数：1、2、3、5、6、10（推荐）、15
+    // 能被 1920x1080 整除的数：1、2、3、4、5、6、8、10、12、15、20
+    // 能被 480x270 整除的数：1、2、3、5、6、10、15
     const cols = 4
-    const row2 = 2
+    // const row2 = 2
     const areaWH = this.width / cols
     const lineWidth = areaWH / 100
-    // const drawSomethingRect = () => {
-    //   const recommendWH = 10
-    //   for (let i = 0; i < this.width / recommendWH; i++) {
-    //     for (let j = 0; j < areaWH / recommendWH; j++) {
-    //       // ...TODO
-    //       const x = 0
-    //       const y = 0
-    //       this.ctx.fillRect(x, y, recommendWH, recommendWH)
-    //     }
-    //   }
-    // }
-    for (let i = 0; i < cols * row2; i++) {
-      const idx = i % cols
-      const idy = Math.floor(i / cols) + 1
-      const x = (idx + 1) * areaWH / 2 + idx * areaWH / 2
-      let y = idy * areaWH / 2
-      if (i >= cols) {
-        y = this.height - areaWH / 2
+    const arr = [3, 5, 7, 9]
+    const num = arr[1]
+    // const num = arr[randomNum(arr.length - 1)]
+    // const num = arr[this.angle1 % (arr.length - 1)]
+    const recommendWH = areaWH / num // 不能定死宽度 否则不会自适应 除以3、5、7、9都能得到相对较好的视觉比例
+    const iMax = this.width / recommendWH
+    const jMax = areaWH / recommendWH
+    for (let i = 0; i < iMax; i++) {
+      if (i % 2 === 0) continue
+      for (let j = 0; j < jMax; j++) {
+        if (j % 2 === 0) continue
+        const x = -recommendWH / 2
+        const y = -recommendWH / 2
+        const w = recommendWH
+        const h = recommendWH
+        const centerX = recommendWH / 2 + recommendWH * i - recommendWH / 2
+        const centerY = recommendWH / 2 + recommendWH * j
+
+        this.ctx.save()
+        this.ctx.lineWidth = lineWidth
+        this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
+        this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
+        this.ctx.setLineDash([lineWidth, lineWidth])
+
+        this.ctx.save()
+        this.ctx.translate(centerX, centerY)
+        this.ctx.rotate(this.angle1 * Math.PI / 180)
+        this.ctx.strokeRect(x, y, w, h)
+        this.ctx.strokeRect(x / 2, y / 2, w / 2, h / 2)
+        this.ctx.restore()
+
+        this.ctx.save()
+        this.ctx.translate(centerX, this.height - centerY)
+        this.ctx.rotate(this.angle1 * Math.PI / 180)
+        this.ctx.strokeRect(x, y, w, h)
+        this.ctx.strokeRect(x / 2, y / 2, w / 2, h / 2)
+        this.ctx.restore()
+
+        this.ctx.restore()
       }
-      this.ctx.save()
-      this.ctx.translate(x, y)
-      this.ctx.rotate(this.angle1 * Math.PI / 180)
-      this.ctx.lineWidth = lineWidth
-      this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
-      this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
-      this.ctx.setLineDash([lineWidth, lineWidth])
-      // drawSomethingRect()
-      this.ctx.restore()
     }
   }
 
