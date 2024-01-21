@@ -169,6 +169,17 @@ class CanvasDrawMain {
     const row2 = 2
     const areaWH = this.width / cols
     const lineWidth = areaWH / 100
+    // const drawSomethingRect = () => {
+    //   const recommendWH = 10
+    //   for (let i = 0; i < this.width / recommendWH; i++) {
+    //     for (let j = 0; j < areaWH / recommendWH; j++) {
+    //       // ...TODO
+    //       const x = 0
+    //       const y = 0
+    //       this.ctx.fillRect(x, y, recommendWH, recommendWH)
+    //     }
+    //   }
+    // }
     for (let i = 0; i < cols * row2; i++) {
       const idx = i % cols
       const idy = Math.floor(i / cols) + 1
@@ -184,7 +195,7 @@ class CanvasDrawMain {
       this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
       this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
       this.ctx.setLineDash([lineWidth, lineWidth])
-      // ...TODO
+      // drawSomethingRect()
       this.ctx.restore()
     }
   }
