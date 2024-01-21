@@ -19,7 +19,6 @@ class CanvasDrawMain {
   audios: any = []
   timer1
   angle1 = 0
-  angle2 = 0
 
   constructor (options: any = {}) {
     Object.assign(this.options, options)
@@ -354,87 +353,104 @@ class CanvasDrawMain {
       fn5: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 1.4
+        const bigArcR = areaWH / 2 * 0.9
 
         {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY + bigArcR / 2
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
         }
 
         {
-          const smallArcX = bigArcX
-          const smallArcY = bigArcY - bigArcR / 2
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
         }
 
         {
-          const smallArcX = bigArcX + bigArcR / 2
-          const smallArcY = bigArcY
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
         }
 
         {
-          const smallArcX = bigArcX - bigArcR / 2
-          const smallArcY = bigArcY
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
           const smallArcR = bigArcR / 2 - this.ctx.lineWidth
-          this.ctx.beginPath()
-          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合内半圆
-          this.ctx.stroke()
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+          this.ctx.strokeRect(-smallArcR / 2, -smallArcR / 2 / 2, smallArcR, smallArcR / 2)
         }
       },
       fn6: () => {
-        this.ctx.save()
-
-        const bigArcX = -areaWH / 6
+        const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.8
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+        const bigArcR = areaWH / 2 * 0.9
 
-        const smallArcR = bigArcR / 2
-        const smallArcX = bigArcX - smallArcR + lineWidth
-        const smallArcY = bigArcY
-        this.ctx.beginPath()
-        this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-        this.ctx.closePath()
-        this.ctx.stroke()
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
 
-        this.ctx.closePath()
-        this.ctx.restore()
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+          this.ctx.strokeRect(-smallArcR / 2, -smallArcR / 2 / 2, smallArcR, smallArcR / 2)
+        }
       },
       fn7: () => {
-        this.ctx.save()
-
-        const bigArcX = -areaWH / 6
+        const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.8
-        this.ctx.beginPath()
-        this.ctx.arc(bigArcX, bigArcY, bigArcR, 0, 360 * Math.PI / 180)
-        this.ctx.closePath()
-        this.ctx.stroke()
+        const bigArcR = areaWH / 2 * 0.9
 
-        const smallArcR = bigArcR / 2
-        const smallArcX = bigArcX - smallArcR + lineWidth
-        const smallArcY = bigArcY
-        this.ctx.beginPath()
-        this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
-        this.ctx.closePath()
-        this.ctx.stroke()
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
 
-        this.ctx.closePath()
-        this.ctx.restore()
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+          this.ctx.strokeRect(-smallArcR / 2, -smallArcR / 2 / 2, smallArcR, smallArcR / 2)
+        }
       }
     }
     for (let i = 0; i < cols * row2; i++) {
@@ -447,10 +463,7 @@ class CanvasDrawMain {
       }
       this.ctx.save()
       this.ctx.translate(x, y)
-      let angle = this.angle1
-      const isAngle2 = [5, 6, 7].includes(i)
-      if (isAngle2) angle = this.angle2
-      this.ctx.rotate(angle * Math.PI / 180)
+      this.ctx.rotate(this.angle1 * Math.PI / 180)
       this.ctx.lineWidth = lineWidth
       this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
       this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
@@ -472,14 +485,12 @@ class CanvasDrawMain {
         x++
         this.angle1 += i
         this.angle1 %= 360
-        this.angle2 += 10
-        this.angle2 %= 360
         if (x % 10 === 0) {
           this.audios[x % this.audioMax].play()
           i++
         }
         this.draw()
-        if (i <= 360) { // angle1小于360即可 angle2需要等于360  为了兼容angle2 固此处使用小于等于
+        if (i < 360) {
           changAngleTrigger()
         }
       })
