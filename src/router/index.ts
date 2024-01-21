@@ -33,7 +33,7 @@ const router = createRouter({
           component: () => import('@/views/canvas/3/index.vue')
         },
         {
-          path: '4', // ...TODO
+          path: '4',
           name: 'canvas4', // 先绘制满屏的小正方形 - 随后使之围绕自身的中心点进行旋转
           component: () => import('@/views/canvas/4/index.vue')
         },

@@ -159,13 +159,6 @@ class CanvasDrawMain {
     }
   }
 
-  drawSmallArc (smallArcX, smallArcY, smallArcR) {
-    this.ctx.beginPath()
-    this.ctx.arc(smallArcX, smallArcY, smallArcR / 2, 0, 360 * Math.PI / 180) // 4个闭合外半圆
-    this.ctx.closePath()
-    this.ctx.stroke()
-  }
-
   drawMain () {
     // 1920x1080 竖着分4份 横着分2份 分成8块区域 中间空隙附加文案
     const cols = 4

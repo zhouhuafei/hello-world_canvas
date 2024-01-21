@@ -1,3 +1,5 @@
+import canvasApi from 'zhf.canvas-api'
+
 let self
 const onKeyDownTrigger = async (e) => {
   console.log('e.keyCode：', e.keyCode)
@@ -10,6 +12,7 @@ class CanvasDrawMain {
   options: any = { wrap: '.ui-canvas-wrap' }
   canvasWrap
   canvas
+  padding = 40
   width
   height
   centerX
@@ -55,10 +58,58 @@ class CanvasDrawMain {
     this.ctx = this.canvas.getContext('2d')
   }
 
+  drawText () {
+    this.ctx.save()
+
+    this.ctx.textAlign = 'center'
+    this.ctx.fillStyle = 'rgba(0,255,0,0.6)'
+
+    const obj: any = {}
+    let allLineHeight = 0
+    this.options.mainTexts.forEach((text, index) => {
+      const prefectWordLength = 30 // 16比9的分辨率：一行展示30个字效果最佳
+      obj[`fontSize${index}`] = (this.width - this.padding * 2) / prefectWordLength
+      obj[`lineHeight${index}`] = obj[`fontSize${index}`] * 1.6
+      allLineHeight += obj[`lineHeight${index}`]
+    })
+
+    // this.ctx.save()
+    // const w = this.width - this.padding
+    // const h = allLineHeight + this.padding / 2
+    // const x = this.padding / 2
+    // const y = this.centerY - h / 2
+    // const r = Math.min(w, allLineHeight) / 10
+    // this.ctx.fillStyle = 'rgba(0,255,0,0.2)'
+    // canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
+    // this.ctx.fill()
+    // this.ctx.restore()
+
+    this.options.mainTexts.forEach((text, index) => {
+      if (index === 0) {
+        obj[`y${index}`] = this.centerY - allLineHeight / 2
+      } else {
+        obj[`y${index}`] = obj[`y${index - 1}`] + obj[`lineHeight${index - 1}`]
+      }
+      canvasApi.drawMoreLineText({
+        ctx: this.ctx,
+        text,
+        fontFamily: '黑体', // 在win系统上，黑体可以让文字正正好处于行高的正中间，其他字体多多少少都存在点肉眼可见的误差。
+        fontSize: obj[`fontSize${index}`],
+        lineWidth: this.width,
+        lineHeight: obj[`lineHeight${index}`],
+        x: this.centerX,
+        y: obj[`y${index}`]
+      })
+    })
+
+    this.ctx.restore()
+  }
+
   draw () {
     this.clear()
     this.drawBgColor()
-    this.drawGuideLine()
+    // this.drawGuideLine()
+    this.drawText()
     this.drawMain()
   }
 
@@ -109,31 +160,33 @@ class CanvasDrawMain {
   }
 
   drawMain () {
-    // ...TODO
+    // 1920x1080 竖着分4份 横着分2份 分成8块区域 中间空隙附加文案
     // 如果一个数既能被1920整除又能被1080整除
     // 那么以这个数为边长组合出来的正方形一定能铺满全屏
-    // 能被 1920x1080 整除的数：1、2、3、4、5、6、8、10、12、15、20（推荐）
+    // 能被 1920x1080 整除的数：1、2、3、4、5、6、8、10（推荐）、12、15、20
     // 能被 480x270 整除的数：1、2、3、5、6、10（推荐）、15
-    this.ctx.save()
-
-    this.ctx.translate(this.centerX, this.centerY)
-    this.ctx.rotate(this.angle1 * Math.PI / 180)
-
-    const rows = 100
-    const cols = 100
-    const rowsW = this.width / rows
-    const rowsH = this.height / cols
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < rows; j++) {
-        this.ctx.fillStyle = (i + j) % 2 === 0 ? '#fff' : '#000'
-        const x = -this.width / 2 + i * rowsW
-        const y = -this.height / 2 + j * rowsH
-        this.ctx.fillRect(x, y, rowsW, rowsH)
+    const cols = 4
+    const row2 = 2
+    const areaWH = this.width / cols
+    const lineWidth = areaWH / 100
+    for (let i = 0; i < cols * row2; i++) {
+      const idx = i % cols
+      const idy = Math.floor(i / cols) + 1
+      const x = (idx + 1) * areaWH / 2 + idx * areaWH / 2
+      let y = idy * areaWH / 2
+      if (i >= cols) {
+        y = this.height - areaWH / 2
       }
+      this.ctx.save()
+      this.ctx.translate(x, y)
+      this.ctx.rotate(this.angle1 * Math.PI / 180)
+      this.ctx.lineWidth = lineWidth
+      this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
+      this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
+      this.ctx.setLineDash([lineWidth, lineWidth])
+      // ...TODO
+      this.ctx.restore()
     }
-
-    this.ctx.closePath()
-    this.ctx.restore()
   }
 
   moveMain () {
