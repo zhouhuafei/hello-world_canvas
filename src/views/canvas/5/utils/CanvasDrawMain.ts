@@ -479,7 +479,7 @@ class CanvasDrawMain {
           i++
         }
         this.draw()
-        if (i < 360) {
+        if (i <= 360) { // angle1小于360即可 angle2需要等于360  为了兼容angle2 固此处使用小于等于
           changAngleTrigger()
         }
       })
