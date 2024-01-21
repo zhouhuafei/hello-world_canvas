@@ -73,16 +73,16 @@ class CanvasDrawMain {
       allLineHeight += obj[`lineHeight${index}`]
     })
 
-    this.ctx.save()
-    const w = this.width - this.padding
-    const h = allLineHeight + this.padding / 2
-    const x = this.padding / 2
-    const y = this.centerY - h / 2
-    const r = Math.min(w, allLineHeight) / 10
-    this.ctx.fillStyle = 'rgba(0,255,0,0.1)'
-    canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
-    this.ctx.fill()
-    this.ctx.restore()
+    // this.ctx.save()
+    // const w = this.width - this.padding
+    // const h = allLineHeight + this.padding / 2
+    // const x = this.padding / 2
+    // const y = this.centerY - h / 2
+    // const r = Math.min(w, allLineHeight) / 10
+    // this.ctx.fillStyle = 'rgba(0,255,0,0.2)'
+    // canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
+    // this.ctx.fill()
+    // this.ctx.restore()
 
     this.options.mainTexts.forEach((text, index) => {
       if (index === 0) {
