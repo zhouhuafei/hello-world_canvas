@@ -34,12 +34,12 @@ const router = createRouter({
         },
         {
           path: '4',
-          name: 'canvas4', // 先绘制满屏的小正方形 - 随后使之围绕自身的中心点进行旋转
+          name: 'canvas4', // 先绘制大圆小圆各种场景合集 - 随后使之围绕自身的中心点进行旋转
           component: () => import('@/views/canvas/4/index.vue')
         },
         {
           path: '5',
-          name: 'canvas5', // 先绘制大圆小圆各种场景合集 - 随后使之围绕自身的中心点进行旋转
+          name: 'canvas5', // 先绘制满屏的小正方形 - 随后使之围绕自身的中心点进行旋转
           component: () => import('@/views/canvas/5/index.vue')
         }
       ]

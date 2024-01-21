@@ -161,14 +161,342 @@ class CanvasDrawMain {
 
   drawMain () {
     // 1920x1080 竖着分4份 横着分2份 分成8块区域 中间空隙附加文案
-    // 如果一个数既能被1920整除又能被1080整除
-    // 那么以这个数为边长组合出来的正方形一定能铺满全屏
-    // 能被 1920x1080 整除的数：1、2、3、4、5、6、8、10（推荐）、12、15、20
-    // 能被 480x270 整除的数：1、2、3、5、6、10（推荐）、15
     const cols = 4
     const row2 = 2
     const areaWH = this.width / cols
     const lineWidth = areaWH / 100
+    const fns = {
+      fn0: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 0.7
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY + bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY - bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 360 * Math.PI / 180) // 4个正圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+      },
+      fn1: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 0.7
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY + bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个闭合外半圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY - bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个闭合外半圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个闭合外半圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个闭合外半圆
+          this.ctx.closePath()
+          this.ctx.stroke()
+        }
+
+        {
+          this.ctx.beginPath()
+          this.ctx.moveTo(-bigArcR / 3, 0)
+          this.ctx.lineTo(bigArcR / 3, 0)
+          this.ctx.stroke()
+          this.ctx.beginPath()
+          this.ctx.moveTo(bigArcR / 10, -bigArcR / 6)
+          this.ctx.lineTo(bigArcR / 10, bigArcR / 3)
+          this.ctx.stroke()
+        }
+      },
+      fn2: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 0.7
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY + bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合外半圆
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY - bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合外半圆
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合外半圆
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合外半圆
+          this.ctx.stroke()
+        }
+
+        {
+          this.ctx.beginPath()
+          this.ctx.moveTo(-bigArcR / 6, 0)
+          this.ctx.lineTo(bigArcR / 6, 0)
+          this.ctx.stroke()
+          this.ctx.beginPath()
+          this.ctx.moveTo(0, -bigArcR / 6)
+          this.ctx.lineTo(0, bigArcR / 3)
+          this.ctx.stroke()
+        }
+      },
+      fn3: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 1.2
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY + bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 180 * Math.PI / 180, 360 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX
+          const smallArcY = bigArcY - bigArcR / 2
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 0, 180 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 90 * Math.PI / 180, 270 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.stroke()
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 2
+          const smallArcY = bigArcY
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.beginPath()
+          this.ctx.arc(smallArcX, smallArcY, smallArcR, 270 * Math.PI / 180, 90 * Math.PI / 180) // 4个非闭合内半圆
+          this.ctx.stroke()
+        }
+      },
+      fn4: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 0.8
+
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+          this.ctx.strokeRect(-smallArcR / 2, -smallArcR / 2 / 2, smallArcR, smallArcR / 2)
+        }
+      },
+      fn5: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 0.8
+
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+          this.ctx.strokeRect(-smallArcR / 2, -smallArcR / 2 / 2, smallArcR, smallArcR / 2)
+        }
+      },
+      fn6: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 0.8
+
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+          this.ctx.strokeRect(-smallArcR / 2, -smallArcR / 2 / 2, smallArcR, smallArcR / 2)
+        }
+      },
+      fn7: () => {
+        const bigArcX = 0
+        const bigArcY = 0
+        const bigArcR = areaWH / 2 * 0.8
+
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX - bigArcR / 1.4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY - bigArcR + bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+        }
+
+        {
+          const smallArcX = bigArcX + bigArcR / 2 - bigArcR / 4
+          const smallArcY = bigArcY + bigArcR / 2 - bigArcR / 4
+          const smallArcR = bigArcR / 2 - this.ctx.lineWidth
+          this.ctx.strokeRect(smallArcX, smallArcY, smallArcR, smallArcR)
+          this.ctx.strokeRect(-smallArcR / 2, -smallArcR / 2 / 2, smallArcR, smallArcR / 2)
+        }
+      }
+    }
     for (let i = 0; i < cols * row2; i++) {
       const idx = i % cols
       const idy = Math.floor(i / cols) + 1
@@ -184,7 +512,7 @@ class CanvasDrawMain {
       this.ctx.strokeStyle = 'rgba(0,255,0,0.8)'
       this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
       this.ctx.setLineDash([lineWidth, lineWidth])
-      // ...TODO
+      fns[`fn${i}`].call(this, { bigArcX: 0, bigArcY: 0, areaWH })
       this.ctx.restore()
     }
   }

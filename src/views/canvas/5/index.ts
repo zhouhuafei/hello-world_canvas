@@ -10,8 +10,8 @@ class CanvasDrawPage {
         new URL('@/assets/audios/bgm3.mp3', import.meta.url).href
       ],
       mainTexts: [
-        `focus blur scroll 不支持事件冒泡 支持事件委托`,
-        `给元素设置 class="ad" 会被浏览器 当做广告屏蔽`
+        `如果 商家把预制菜 改名为懒人菜 或者冷鲜菜 你会不会买`,
+        `外围虹吸 小a新低 小a的JoJo被绿柱砸没了 所以小a没Jo了`
       ]
     })
   }
