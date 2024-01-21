@@ -1,3 +1,5 @@
+import canvasApi from 'zhf.canvas-api'
+
 let self
 const onKeyDownTrigger = async (e) => {
   console.log('e.keyCode：', e.keyCode)
@@ -10,6 +12,7 @@ class CanvasDrawMain {
   options: any = { wrap: '.ui-canvas-wrap' }
   canvasWrap
   canvas
+  padding = 40
   width
   height
   centerX
@@ -55,10 +58,58 @@ class CanvasDrawMain {
     this.ctx = this.canvas.getContext('2d')
   }
 
+  drawText () {
+    this.ctx.save()
+
+    this.ctx.textAlign = 'center'
+    this.ctx.fillStyle = 'rgba(0,255,0,0.6)'
+
+    const obj: any = {}
+    let allLineHeight = 0
+    this.options.mainTexts.forEach((text, index) => {
+      const prefectWordLength = 30 // 16比9的分辨率：一行展示30个字效果最佳
+      obj[`fontSize${index}`] = (this.width - this.padding * 2) / prefectWordLength
+      obj[`lineHeight${index}`] = obj[`fontSize${index}`] * 1.6
+      allLineHeight += obj[`lineHeight${index}`]
+    })
+
+    this.ctx.save()
+    const w = this.width - this.padding
+    const h = allLineHeight + this.padding / 2
+    const x = this.padding / 2
+    const y = this.centerY - h / 2
+    const r = Math.min(w, allLineHeight) / 10
+    this.ctx.fillStyle = 'rgba(0,255,0,0.1)'
+    canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
+    this.ctx.fill()
+    this.ctx.restore()
+
+    this.options.mainTexts.forEach((text, index) => {
+      if (index === 0) {
+        obj[`y${index}`] = this.centerY - allLineHeight / 2
+      } else {
+        obj[`y${index}`] = obj[`y${index - 1}`] + obj[`lineHeight${index - 1}`]
+      }
+      canvasApi.drawMoreLineText({
+        ctx: this.ctx,
+        text,
+        fontFamily: '黑体', // 在win系统上，黑体可以让文字正正好处于行高的正中间，其他字体多多少少都存在点肉眼可见的误差。
+        fontSize: obj[`fontSize${index}`],
+        lineWidth: this.width,
+        lineHeight: obj[`lineHeight${index}`],
+        x: this.centerX,
+        y: obj[`y${index}`]
+      })
+    })
+
+    this.ctx.restore()
+  }
+
   draw () {
     this.clear()
     this.drawBgColor()
     // this.drawGuideLine()
+    this.drawText()
     this.drawMain()
   }
 
@@ -125,7 +176,7 @@ class CanvasDrawMain {
       fn0: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.9
+        const bigArcR = areaWH / 2 * 0.7
 
         {
           const smallArcX = bigArcX
@@ -170,7 +221,7 @@ class CanvasDrawMain {
       fn1: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.9
+        const bigArcR = areaWH / 2 * 0.7
 
         {
           const smallArcX = bigArcX
@@ -226,7 +277,7 @@ class CanvasDrawMain {
       fn2: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.9
+        const bigArcR = areaWH / 2 * 0.7
 
         {
           const smallArcX = bigArcX
@@ -278,7 +329,7 @@ class CanvasDrawMain {
       fn3: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 1.4
+        const bigArcR = areaWH / 2 * 1.2
 
         {
           const smallArcX = bigArcX
@@ -319,7 +370,7 @@ class CanvasDrawMain {
       fn4: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.9
+        const bigArcR = areaWH / 2 * 0.8
 
         {
           const smallArcX = bigArcX - bigArcR / 1.4
@@ -353,7 +404,7 @@ class CanvasDrawMain {
       fn5: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.9
+        const bigArcR = areaWH / 2 * 0.8
 
         {
           const smallArcX = bigArcX - bigArcR / 1.4
@@ -387,7 +438,7 @@ class CanvasDrawMain {
       fn6: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.9
+        const bigArcR = areaWH / 2 * 0.8
 
         {
           const smallArcX = bigArcX - bigArcR / 1.4
@@ -421,7 +472,7 @@ class CanvasDrawMain {
       fn7: () => {
         const bigArcX = 0
         const bigArcY = 0
-        const bigArcR = areaWH / 2 * 0.9
+        const bigArcR = areaWH / 2 * 0.8
 
         {
           const smallArcX = bigArcX - bigArcR / 1.4
