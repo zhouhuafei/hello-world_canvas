@@ -10,7 +10,7 @@ class CanvasDrawPage {
         new URL('@/assets/audios/bgm3.mp3', import.meta.url).href
       ],
       mainTexts: [
-        `focus blur scroll 不支持事件冒泡 支持事件委托`,
+        `focus blur scroll 不支持事件冒泡 支持事件捕获`,
         `给元素设置 class="ad" 会被浏览器 当做广告屏蔽`
       ]
     })
