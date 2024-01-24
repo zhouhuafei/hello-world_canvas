@@ -180,11 +180,10 @@ class CanvasDrawMain {
   }
 
   moveMain () {
-    this.list = []
     cancelAnimationFrame(this.timer1)
 
     let x = 0
-    let i = 1
+    let i = 0
 
     const colWidth = 20
     const rowHeight = 15
@@ -192,9 +191,9 @@ class CanvasDrawMain {
     const rows = this.height / rowHeight
     const fontSize = 12
     const text = '辣鸡股市'
+    this.list = [...Array(cols)].map(() => [])
 
     const listPush = (i) => {
-      this.list = [...Array(cols)].map(() => [])
       this.list.forEach((vArr, colIdx) => {
         vArr.push({
           x: colWidth / 2 + colWidth * colIdx,
@@ -222,11 +221,11 @@ class CanvasDrawMain {
         if (x % 20 === 0) {
           this.audios[x % this.audioMax].play()
         }
+        this.draw()
         i++
         if (i < 180) {
           listPush(i)
         }
-        this.draw()
         if (this.list.length) {
           changAngleTrigger()
         }
