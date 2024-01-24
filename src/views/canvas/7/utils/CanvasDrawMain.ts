@@ -35,6 +35,7 @@ class CanvasDrawMain {
     this.genCanvas()
     this.genCtx()
     this.genAudios()
+    this.drawBgColor()
     await this.draw()
     this.addOnKeyDown()
   }
@@ -60,10 +61,10 @@ class CanvasDrawMain {
   }
 
   draw () {
-    this.clear()
-    this.drawBgColor()
+    // this.clear()
+    this.drawBgColor(0.02)
     // this.drawGuideLine()
-    this.drawText()
+    // this.drawText()
     this.drawMain()
   }
 
@@ -71,9 +72,10 @@ class CanvasDrawMain {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
 
-  drawBgColor () {
+  drawBgColor (opacity = 1) {
     this.ctx.save()
 
+    this.ctx.fillStyle = `rgba(0,0,0,${opacity})`
     this.ctx.fillRect(0, 0, this.width, this.height)
 
     this.ctx.restore()
@@ -128,16 +130,16 @@ class CanvasDrawMain {
       allLineHeight += obj[`lineHeight${index}`]
     })
 
-    // this.ctx.save()
-    // const w = this.width - this.padding
-    // const h = allLineHeight + this.padding / 2
-    // const x = this.padding / 2
-    // const y = this.centerY - h / 2
-    // const r = Math.min(w, allLineHeight) / 10
-    // this.ctx.fillStyle = 'rgba(0,255,0,0.2)'
-    // canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
-    // this.ctx.fill()
-    // this.ctx.restore()
+    this.ctx.save()
+    const w = this.width - this.padding
+    const h = allLineHeight + this.padding / 2
+    const x = this.padding / 2
+    const y = this.centerY - h / 2
+    const r = Math.min(w, allLineHeight) / 10
+    this.ctx.fillStyle = 'rgba(0,255,0,0.2)'
+    canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
+    this.ctx.fill()
+    this.ctx.restore()
 
     this.options.mainTexts.forEach((text, index) => {
       if (index === 0) {
@@ -161,15 +163,20 @@ class CanvasDrawMain {
   }
 
   drawMain () {
-    this.list.forEach(v => {
-      this.ctx.save()
-      this.ctx.beginPath()
-      this.ctx.fillStyle = v.bgColor
-      this.ctx.globalAlpha = v.opacity / 100
-      this.ctx.arc(v.x, v.y, v.r, 0, 360 * Math.PI / 180)
-      this.ctx.fill()
-      this.ctx.closePath()
-      this.ctx.restore()
+    this.list.forEach(item => {
+      item.forEach(v => {
+        this.ctx.save()
+        this.ctx.beginPath()
+        this.ctx.textAlign = 'center'
+        this.ctx.textBaseline = 'middle'
+        this.ctx.font = `${v.fontSize}px 黑体`
+        this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
+        this.ctx.globalAlpha = v.opacity / 100
+        this.ctx.fillText(v.text, v.x, v.y)
+        this.ctx.fill()
+        this.ctx.closePath()
+        this.ctx.restore()
+      })
     })
   }
 
@@ -180,14 +187,24 @@ class CanvasDrawMain {
     let x = 0
     let i = 1
 
+    const colWidth = 20
+    const rowHeight = 15
+    const cols = this.width / colWidth
+    const rows = this.height / rowHeight
+    const fontSize = 12
+    const text = '辣鸡股市'
+
     const listPush = (i) => {
-      this.list.push(...[...Array(i)].map(() => ({
-        x: randomNum(this.width),
-        y: randomNum(this.height),
-        r: 0,
-        opacity: 100,
-        bgColor: `rgb(${randomNum(255)},${randomNum(255)},${randomNum(255)})`
-      })))
+      this.list = [...Array(cols)].map(() => [])
+      this.list.forEach((vArr, colIdx) => {
+        vArr.push({
+          x: colWidth / 2 + colWidth * colIdx,
+          y: rowHeight / 2 + i % rows * rowHeight,
+          fontSize,
+          text: text.split('')[i % text.length],
+          opacity: 100
+        })
+      })
     }
 
     listPush(i)
@@ -195,18 +212,24 @@ class CanvasDrawMain {
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
         console.log('changAngleTrigger：')
+
         x++
-        this.list.forEach(v => {
-          v.r++
-          v.opacity--
+        this.list.forEach(vArr => {
+          vArr.forEach(v => {
+            v.opacity--
+          })
         })
-        this.list = this.list.filter(v => v.opacity > 0)
+        this.list = this.list.map(vArr => vArr.filter(v => v.opacity > 0))
         if (x % 20 === 0) {
           this.audios[x % this.audioMax].play()
-          i++
-          if (i < 180) {
-            listPush(i)
-          }
+          // i++
+          // if (i < 180) {
+          //   listPush(i)
+          // }
+        }
+        i++
+        if (i < 180) {
+          listPush(i)
         }
         this.draw()
         if (this.list.length) {
