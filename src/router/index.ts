@@ -41,6 +41,11 @@ const router = createRouter({
           path: '5',
           name: 'canvas5', // 先绘制满屏的小正方形 - 随后使之围绕自身的中心点进行旋转
           component: () => import('@/views/canvas/5/index.vue')
+        },
+        {
+          path: '6',
+          name: 'canvas6', // 效果篇 - 透明球 - 小球变大变透明直到消失
+          component: () => import('@/views/canvas/6/index.vue')
         }
       ]
     },
