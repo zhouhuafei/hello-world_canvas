@@ -194,18 +194,15 @@ class CanvasDrawMain {
     this.list = [...Array(cols)].map(() => [])
 
     const listPush = (i) => {
-      this.list.forEach((vArr, colIdx) => {
-        vArr.push({
-          x: colWidth / 2 + colWidth * colIdx,
-          y: rowHeight / 2 + i % rows * rowHeight,
-          fontSize,
-          text: text.split('')[i % text.length],
-          opacity: 100
-        })
+      const colIdx = randomNum(cols - 1)
+      this.list[colIdx].push({
+        x: colWidth / 2 + colWidth * colIdx,
+        y: rowHeight / 2 + i % rows * rowHeight,
+        fontSize,
+        text: text.split('')[i % text.length],
+        opacity: 100
       })
     }
-
-    listPush(i)
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
@@ -214,18 +211,19 @@ class CanvasDrawMain {
         x++
         this.list.forEach(vArr => {
           vArr.forEach(v => {
+            v.y = rowHeight / 2 + x % rows * rowHeight
             v.opacity--
           })
         })
         this.list = this.list.map(vArr => vArr.filter(v => v.opacity > 0))
         if (x % 20 === 0) {
           this.audios[x % this.audioMax].play()
+          i++
+          if (i < 180) {
+            listPush(i)
+          }
         }
         this.draw()
-        i++
-        if (i < 180) {
-          listPush(i)
-        }
         if (this.list.length) {
           changAngleTrigger()
         }
