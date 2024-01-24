@@ -16,7 +16,7 @@ export default defineConfig({
           order: 'pre',
           handler (fileContent, filePath) {
             if (filePath.includes('.vue')) {
-              console.log('filePath：', filePath)
+              // console.log('filePath：', filePath)
               const reg1 = /<div/g
               fileContent = fileContent.replace(reg1, `<div data-hello="world"`)
               return fileContent
