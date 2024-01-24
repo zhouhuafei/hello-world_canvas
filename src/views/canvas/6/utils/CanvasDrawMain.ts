@@ -160,7 +160,7 @@ class CanvasDrawMain {
           }
         }
         this.draw()
-        if (!this.list.length) {
+        if (this.list.length) {
           changAngleTrigger()
         }
       })
