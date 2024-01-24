@@ -44,7 +44,7 @@ const router = createRouter({
         },
         {
           path: '6',
-          name: 'canvas6', // 效果篇 - 透明球 - 小球变大变透明直到消失
+          name: 'canvas6', // 效果篇 - 小球变大变透明 - 小球变大变透明直到消失
           component: () => import('@/views/canvas/6/index.vue')
         },
         {
