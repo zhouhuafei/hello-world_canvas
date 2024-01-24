@@ -126,6 +126,7 @@ class CanvasDrawMain {
   }
 
   moveMain () {
+    this.list = []
     cancelAnimationFrame(this.timer1)
 
     let x = 0
