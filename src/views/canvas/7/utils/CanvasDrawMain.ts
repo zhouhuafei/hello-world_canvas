@@ -185,11 +185,11 @@ class CanvasDrawMain {
     let x = 0
     let i = 0
 
-    const colWidth = 20
-    const rowHeight = 15
+    const colWidth = 10
+    const rowHeight = 10
     const cols = this.width / colWidth
     const rows = this.height / rowHeight
-    const fontSize = 12
+    const fontSize = 10
     const text = '辣鸡股市'
     this.list = [...Array(cols)].map(() => [])
 
