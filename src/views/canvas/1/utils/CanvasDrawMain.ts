@@ -66,9 +66,10 @@ class CanvasDrawMain {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
 
-  drawBgColor () {
+  drawBgColor (opacity = 1) {
     this.ctx.save()
 
+    this.ctx.fillStyle = `rgba(0,0,0,${opacity})`
     this.ctx.fillRect(0, 0, this.width, this.height)
 
     this.ctx.restore()

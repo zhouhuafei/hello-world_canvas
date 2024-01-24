@@ -35,7 +35,6 @@ class CanvasDrawMain {
     this.genCanvas()
     this.genCtx()
     this.genAudios()
-    this.drawBgColor()
     await this.draw()
     this.addOnKeyDown()
   }
@@ -61,11 +60,11 @@ class CanvasDrawMain {
   }
 
   draw () {
-    // this.clear()
-    this.drawBgColor(0.02)
+    this.clear()
+    this.drawBgColor()
     // this.drawGuideLine()
-    // this.drawText()
     this.drawMain()
+    this.drawText()
   }
 
   clear () {
@@ -136,7 +135,7 @@ class CanvasDrawMain {
     const x = this.padding / 2
     const y = this.centerY - h / 2
     const r = Math.min(w, allLineHeight) / 10
-    this.ctx.fillStyle = 'rgba(0,255,0,0.2)'
+    this.ctx.fillStyle = 'rgba(0,0,0,0.6)'
     canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
     this.ctx.fill()
     this.ctx.restore()
@@ -222,10 +221,6 @@ class CanvasDrawMain {
         this.list = this.list.map(vArr => vArr.filter(v => v.opacity > 0))
         if (x % 20 === 0) {
           this.audios[x % this.audioMax].play()
-          // i++
-          // if (i < 180) {
-          //   listPush(i)
-          // }
         }
         i++
         if (i < 180) {

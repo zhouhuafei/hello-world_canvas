@@ -63,17 +63,18 @@ class CanvasDrawMain {
     this.clear()
     this.drawBgColor()
     // this.drawGuideLine()
-    this.drawText()
     this.drawMain()
+    this.drawText()
   }
 
   clear () {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
 
-  drawBgColor () {
+  drawBgColor (opacity = 1) {
     this.ctx.save()
 
+    this.ctx.fillStyle = `rgba(0,0,0,${opacity})`
     this.ctx.fillRect(0, 0, this.width, this.height)
 
     this.ctx.restore()
@@ -128,16 +129,16 @@ class CanvasDrawMain {
       allLineHeight += obj[`lineHeight${index}`]
     })
 
-    // this.ctx.save()
-    // const w = this.width - this.padding
-    // const h = allLineHeight + this.padding / 2
-    // const x = this.padding / 2
-    // const y = this.centerY - h / 2
-    // const r = Math.min(w, allLineHeight) / 10
-    // this.ctx.fillStyle = 'rgba(0,255,0,0.2)'
-    // canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
-    // this.ctx.fill()
-    // this.ctx.restore()
+    this.ctx.save()
+    const w = this.width - this.padding
+    const h = allLineHeight + this.padding / 2
+    const x = this.padding / 2
+    const y = this.centerY - h / 2
+    const r = Math.min(w, allLineHeight) / 10
+    this.ctx.fillStyle = 'rgba(0,0,0,0.6)'
+    canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
+    this.ctx.fill()
+    this.ctx.restore()
 
     this.options.mainTexts.forEach((text, index) => {
       if (index === 0) {
