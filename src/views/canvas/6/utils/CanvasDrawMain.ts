@@ -64,7 +64,6 @@ class CanvasDrawMain {
     this.drawBgColor()
     // this.drawGuideLine()
     this.drawMain()
-    this.drawText()
   }
 
   clear () {
@@ -112,53 +111,6 @@ class CanvasDrawMain {
       const audio = this.genAudioInfo(this.options.mainBgAudioUrls[i % mainBgAudioNum])
       this.audios.push(audio)
     }
-  }
-
-  drawText () {
-    this.ctx.save()
-
-    this.ctx.textAlign = 'center'
-    this.ctx.fillStyle = 'rgba(0,255,0,0.6)'
-
-    const obj: any = {}
-    let allLineHeight = 0
-    this.options.mainTexts.forEach((text, index) => {
-      const prefectWordLength = 30 // 16比9的分辨率：一行展示30个字效果最佳
-      obj[`fontSize${index}`] = (this.width - this.padding * 2) / prefectWordLength
-      obj[`lineHeight${index}`] = obj[`fontSize${index}`] * 1.6
-      allLineHeight += obj[`lineHeight${index}`]
-    })
-
-    this.ctx.save()
-    const w = this.width - this.padding
-    const h = allLineHeight + this.padding / 2
-    const x = this.padding / 2
-    const y = this.centerY - h / 2
-    const r = Math.min(w, allLineHeight) / 10
-    this.ctx.fillStyle = 'rgba(0,0,0,0.6)'
-    canvasApi.drawRoundRect(this.ctx, x, y, w, h, r)
-    this.ctx.fill()
-    this.ctx.restore()
-
-    this.options.mainTexts.forEach((text, index) => {
-      if (index === 0) {
-        obj[`y${index}`] = this.centerY - allLineHeight / 2
-      } else {
-        obj[`y${index}`] = obj[`y${index - 1}`] + obj[`lineHeight${index - 1}`]
-      }
-      canvasApi.drawMoreLineText({
-        ctx: this.ctx,
-        text,
-        fontFamily: '黑体', // 在win系统上，黑体可以让文字正正好处于行高的正中间，其他字体多多少少都存在点肉眼可见的误差。
-        fontSize: obj[`fontSize${index}`],
-        lineWidth: this.width,
-        lineHeight: obj[`lineHeight${index}`],
-        x: this.centerX,
-        y: obj[`y${index}`]
-      })
-    })
-
-    this.ctx.restore()
   }
 
   drawMain () {
