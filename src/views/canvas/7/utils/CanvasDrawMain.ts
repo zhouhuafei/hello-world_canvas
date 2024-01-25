@@ -142,11 +142,11 @@ class CanvasDrawMain {
     const cols = this.width / colWidth
     const rows = this.height / rowHeight
     const fontSize = 10
-    const text = '辣鸡股市'
+    const text = 'abcdefghijklmnopqrstuvwxyz'
     this.list = [...Array(cols)].map(() => [])
 
     const listPush = (i) => {
-      const colIdx = randomNum(cols - 1)
+      const colIdx = 0
       this.list[colIdx].push({
         x: colWidth / 2 + colWidth * colIdx,
         y: rowHeight / 2 + i % rows * rowHeight,
@@ -161,20 +161,20 @@ class CanvasDrawMain {
         console.log('changAngleTrigger：')
 
         x++
-        this.list.forEach(vArr => {
-          vArr.forEach(v => {
-            v.y = rowHeight / 2 + x % rows * rowHeight
-            v.opacity--
-          })
-        })
+        // this.list.forEach(vArr => {
+        //   vArr.forEach(v => {
+        //     v.y = rowHeight / 2 + x % rows * rowHeight
+        //     // v.opacity--
+        //   })
+        // })
         this.list = this.list.map(vArr => vArr.filter(v => v.opacity > 0))
         if (x % 20 === 0) {
           this.audios[x % this.audioMax].play()
-          i++
-          if (i < 180) {
-            listPush(i)
-          }
         }
+        if (i < 180) {
+          listPush(i)
+        }
+        i++
         this.draw()
         if (this.list.length) {
           changAngleTrigger()
