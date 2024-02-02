@@ -35,6 +35,7 @@ class CanvasDrawMain {
     this.genCanvas()
     this.genCtx()
     this.genAudios()
+    this.drawBgColor()
     await this.draw()
     this.addOnKeyDown()
   }
@@ -60,8 +61,8 @@ class CanvasDrawMain {
   }
 
   draw () {
-    this.clear()
-    this.drawBgColor()
+    // this.clear()
+    // this.drawBgColor()
     // this.drawGuideLine()
     this.drawMain()
   }
@@ -114,6 +115,7 @@ class CanvasDrawMain {
   }
 
   drawMain () {
+    this.drawBgColor(0.02)
     this.list.forEach(item => {
       item.forEach(v => {
         this.ctx.save()
@@ -146,7 +148,7 @@ class CanvasDrawMain {
     this.list = [...Array(cols)].map(() => [])
 
     const listPush = (i) => {
-      const colIdx = 0
+      const colIdx = randomNum(cols - 1)
       this.list[colIdx].push({
         x: colWidth / 2 + colWidth * colIdx,
         y: rowHeight / 2 + i % rows * rowHeight,
@@ -161,20 +163,19 @@ class CanvasDrawMain {
         console.log('changAngleTrigger：')
 
         x++
-        // this.list.forEach(vArr => {
-        //   vArr.forEach(v => {
-        //     v.y = rowHeight / 2 + x % rows * rowHeight
-        //     // v.opacity--
-        //   })
-        // })
+        this.list.forEach(vArr => {
+          vArr.forEach(v => {
+            v.y = rowHeight / 2 + x % rows * rowHeight
+          })
+        })
         this.list = this.list.map(vArr => vArr.filter(v => v.opacity > 0))
         if (x % 20 === 0) {
           this.audios[x % this.audioMax].play()
+          if (i < 180) {
+            listPush(i)
+          }
+          i++
         }
-        if (i < 180) {
-          listPush(i)
-        }
-        i++
         this.draw()
         if (this.list.length) {
           changAngleTrigger()
