@@ -115,7 +115,7 @@ class CanvasDrawMain {
   }
 
   drawMain () {
-    this.drawBgColor(0.02)
+    this.drawBgColor(0.04)
     this.list.forEach(item => {
       item.forEach(v => {
         this.ctx.save()
@@ -139,27 +139,31 @@ class CanvasDrawMain {
     let x = 0
     let i = 0
 
-    const colWidth = 10
-    const rowHeight = 10
-    const cols = this.width / colWidth
-    const rows = this.height / rowHeight
-    const fontSize = 10
     const text = '送你上路的是自己人，请你不要怨恨。'
+    const textLen = text.length
+    const rows = this.height / (textLen * 2)
+    const rowHeight = rows
+    const fontSize = rows
+    const colWidth = rows
+    const cols = Math.floor(this.width / colWidth)
+    const gap = (this.width - colWidth * cols) / 2
+
     this.list = [...Array(cols)].map(() => [])
 
-    const listPush = (i) => {
+    const listPush = () => {
       const colIdx = i % cols
+      // const colIdx = randomNum(cols - 1)
       const idx = 0
       this.list[colIdx].push({
         idx,
-        x: colWidth / 2 + colWidth * colIdx,
+        x: gap + colWidth / 2 + colWidth * colIdx,
         y: rowHeight / 2 + idx * rowHeight,
         fontSize,
-        text: text.split('')[idx % text.length],
+        text: text.split('')[idx % textLen],
         opacity: 100
       })
     }
-    listPush(i)
+    listPush()
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
@@ -167,7 +171,7 @@ class CanvasDrawMain {
 
         this.list.forEach(vArr => {
           vArr.forEach(v => {
-            v.text = text.split('')[v.idx % text.length]
+            v.text = text.split('')[v.idx % textLen]
             v.y = rowHeight / 2 + v.idx * rowHeight
             v.idx++
           })
@@ -176,8 +180,8 @@ class CanvasDrawMain {
         this.list = this.list.map(vArr => vArr.filter(v => v.y <= this.height))
         if (x % 20 === 0) {
           this.audios[x % this.audioMax].play()
-          listPush(i)
           i++
+          listPush()
         }
         this.draw()
         changAngleTrigger()
