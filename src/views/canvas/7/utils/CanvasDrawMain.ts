@@ -124,7 +124,7 @@ class CanvasDrawMain {
         this.ctx.textBaseline = 'middle'
         this.ctx.font = `${v.fontSize}px 黑体`
         this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
-        this.ctx.globalAlpha = v.opacity / 100
+        // this.ctx.globalAlpha = v.opacity / 100
         this.ctx.fillText(v.text, v.x, v.y)
         this.ctx.fill()
         this.ctx.closePath()
@@ -144,42 +144,43 @@ class CanvasDrawMain {
     const cols = this.width / colWidth
     const rows = this.height / rowHeight
     const fontSize = 10
-    const text = 'abcdefghijklmnopqrstuvwxyz'
+    const text = '送你上路的是自己人，请你不要怨恨。'
     this.list = [...Array(cols)].map(() => [])
 
     const listPush = (i) => {
-      const colIdx = randomNum(cols - 1)
+      const colIdx = i % cols
+      const idx = 0
       this.list[colIdx].push({
+        idx,
         x: colWidth / 2 + colWidth * colIdx,
-        y: rowHeight / 2 + i % rows * rowHeight,
+        y: rowHeight / 2 + idx * rowHeight,
         fontSize,
-        text: text.split('')[i % text.length],
+        text: text.split('')[idx % text.length],
         opacity: 100
       })
     }
+    listPush(i)
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
         console.log('changAngleTrigger：')
 
-        x++
         this.list.forEach(vArr => {
           vArr.forEach(v => {
-            v.y = rowHeight / 2 + x % rows * rowHeight
+            v.text = text.split('')[v.idx % text.length]
+            v.y = rowHeight / 2 + v.idx * rowHeight
+            v.idx++
           })
         })
-        this.list = this.list.map(vArr => vArr.filter(v => v.opacity > 0))
+        x++
+        this.list = this.list.map(vArr => vArr.filter(v => v.y <= this.height))
         if (x % 20 === 0) {
           this.audios[x % this.audioMax].play()
-          if (i < 180) {
-            listPush(i)
-          }
+          listPush(i)
           i++
         }
         this.draw()
-        if (this.list.length) {
-          changAngleTrigger()
-        }
+        changAngleTrigger()
       })
     }
 
