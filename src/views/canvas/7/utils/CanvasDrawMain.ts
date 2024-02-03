@@ -115,7 +115,7 @@ class CanvasDrawMain {
   }
 
   drawMain () {
-    this.drawBgColor(0.04)
+    this.drawBgColor(0.02)
     this.list.forEach(item => {
       item.forEach(v => {
         this.ctx.save()
@@ -151,8 +151,8 @@ class CanvasDrawMain {
     this.list = [...Array(cols)].map(() => [])
 
     const listPush = () => {
-      const colIdx = i % cols
-      // const colIdx = randomNum(cols - 1)
+      // const colIdx = i % cols
+      const colIdx = randomNum(cols - 1)
       const idx = 0
       this.list[colIdx].push({
         idx,
@@ -163,7 +163,11 @@ class CanvasDrawMain {
         opacity: 100
       })
     }
-    listPush()
+    const listPushTrigger = () => {
+      const arr = [...Array(randomNum(Math.floor(cols / 5)))]
+      arr.forEach(() => listPush())
+    }
+    listPushTrigger()
 
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
@@ -178,10 +182,10 @@ class CanvasDrawMain {
         })
         x++
         this.list = this.list.map(vArr => vArr.filter(v => v.y <= this.height))
-        if (x % 20 === 0) {
+        if (x % 10 === 0) {
           this.audios[x % this.audioMax].play()
           i++
-          listPush()
+          listPushTrigger()
         }
         this.draw()
         changAngleTrigger()
