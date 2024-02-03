@@ -187,8 +187,10 @@ class CanvasDrawMain {
         this.list = this.list.map(vArr => vArr.filter(v => v.y <= this.height))
         if (x % 10 === 0) {
           this.audios[x % this.audioMax].play()
-          i++
-          listPushTrigger()
+          if (i < 360) {
+            i++
+            listPushTrigger()
+          }
         }
         this.draw()
         changAngleTrigger()
