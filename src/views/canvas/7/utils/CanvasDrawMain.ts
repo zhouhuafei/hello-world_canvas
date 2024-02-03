@@ -139,7 +139,8 @@ class CanvasDrawMain {
     let x = 0
     let i = 0
 
-    const text = '送你上路的是自己人，请你不要怨恨。'
+    // const text = 'abcdefghijklmnopqrstuvwxyz'
+    const text = '我听到了股灾的回响。送你上路的是自己人，请你不要怨恨。'
     const textLen = text.length
     const rows = this.height / (textLen * 2)
     const rowHeight = rows
@@ -164,7 +165,9 @@ class CanvasDrawMain {
       })
     }
     const listPushTrigger = () => {
-      const arr = [...Array(randomNum(Math.floor(cols / 5)))]
+      // const rNum = randomNum(Math.floor(cols / 5))
+      const rNum = 2
+      const arr = [...Array(rNum)]
       arr.forEach(() => listPush())
     }
     listPushTrigger()
