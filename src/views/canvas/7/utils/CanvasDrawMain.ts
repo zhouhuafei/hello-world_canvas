@@ -140,7 +140,7 @@ class CanvasDrawMain {
     let i = 0
 
     // const text = 'abcdefghijklmnopqrstuvwxyz'
-    const text = '￥$我恭喜你发财$￥'
+    const text = '我听到了股灾的回响。送你上路的是自己人，请你不要怨恨。'
     const textLen = text.length
     const rows = this.height / (textLen * 2)
     const rowHeight = rows
