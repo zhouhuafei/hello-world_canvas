@@ -23,8 +23,6 @@ class CanvasDrawMain {
   audios: any = []
   timer1
   list = []
-  scale = 7
-  rotations = 1
 
   constructor (options: any = {}) {
     Object.assign(this.options, options)
@@ -120,7 +118,10 @@ class CanvasDrawMain {
       this.ctx.save()
       this.ctx.beginPath()
       this.ctx.fillStyle = v.bgColor
-      this.ctx.arc(v.x, v.y, v.r, 0, 360 * Math.PI / 180)
+      this.ctx.textAlign = 'center'
+      this.ctx.textBaseline = 'middle'
+      this.ctx.font = `${v.fontSize}px 黑体`
+      this.ctx.fillText(v.text, v.x, v.y)
       this.ctx.fill()
       this.ctx.closePath()
       this.ctx.restore()
@@ -134,15 +135,24 @@ class CanvasDrawMain {
     let x = 0
     let i = 0
 
+    const textAll = '祝大家新年快乐'
+    const textLen = textAll.length
+
     const listPush = (i) => {
       const radian = Math.PI / 180
       const angle = i * radian
+      const idx = Math.floor(i / 360)
+      const scale = Math.floor(this.height / 40)
+      const text = textAll[idx]
+      const fontSize = Math.floor(this.height / 27)
       const yPolyfill = Math.floor(this.height / 15)
       this.list.push({
-        r: 2,
-        bgColor: `rgb(${randomNum(255)},${randomNum(255)},${randomNum(255)})`,
-        x: this.centerX + (-16 * Math.pow(Math.sin(angle), 3)) * this.scale,
-        y: this.centerY + (-(13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle))) * this.scale - yPolyfill
+        text,
+        fontSize,
+        bgColor: `rgb(${randomNum(Math.floor(255))},${randomNum(Math.floor(255 / 3))},${randomNum(Math.floor(255 / 3))})`,
+        // 16前面加个负号就是从左往右绘制
+        x: this.centerX + (16 * Math.pow(Math.sin(angle), 3)) * scale,
+        y: this.centerY + (-(13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle))) * scale - yPolyfill
       })
     }
 
@@ -157,7 +167,7 @@ class CanvasDrawMain {
           this.audios[x % this.audioMax].play()
         }
         i++
-        if (i < this.rotations * 360) {
+        if (i < textLen * 360) {
           listPush(i)
         }
         changAngleTrigger()
