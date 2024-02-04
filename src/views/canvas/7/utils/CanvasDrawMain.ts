@@ -123,7 +123,7 @@ class CanvasDrawMain {
         this.ctx.textAlign = 'center'
         this.ctx.textBaseline = 'middle'
         this.ctx.font = `${v.fontSize}px 黑体`
-        this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
+        this.ctx.fillStyle = 'rgba(255,0,0,0.8)'
         // this.ctx.globalAlpha = v.opacity / 100
         this.ctx.fillText(v.text, v.x, v.y)
         this.ctx.fill()
@@ -140,7 +140,7 @@ class CanvasDrawMain {
     let i = 0
 
     // const text = 'abcdefghijklmnopqrstuvwxyz'
-    const text = '我听到了股灾的回响。送你上路的是自己人，请你不要怨恨。'
+    const text = '祝大家新年快乐祝大家新年快乐祝大家新年快乐'
     const textLen = text.length
     const rows = this.height / (textLen * 2)
     const rowHeight = rows
