@@ -169,8 +169,12 @@ class CanvasDrawMain {
         i++
         if (i < textLen * 360) {
           listPush(i)
+        } else {
+          this.list.splice(this.list.length - 1, 1)
         }
-        changAngleTrigger()
+        if (this.list.length) {
+          changAngleTrigger()
+        }
       })
     }
 
