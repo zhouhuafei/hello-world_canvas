@@ -51,6 +51,11 @@ const router = createRouter({
           path: '7',
           name: 'canvas7', // 效果篇 - 黑客效果
           component: () => import('@/views/canvas/7/index.vue')
+        },
+        {
+          path: '8',
+          name: 'canvas8', // 效果篇 - 画心效果
+          component: () => import('@/views/canvas/8/index.vue')
         }
       ]
     },
