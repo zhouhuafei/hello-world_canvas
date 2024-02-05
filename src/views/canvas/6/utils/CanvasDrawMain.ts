@@ -116,12 +116,12 @@ class CanvasDrawMain {
   drawMain () {
     this.list.forEach(v => {
       this.ctx.save()
-      this.ctx.beginPath()
       this.ctx.fillStyle = v.bgColor
       this.ctx.globalAlpha = v.opacity / 100
+      this.ctx.beginPath()
       this.ctx.arc(v.x, v.y, v.r, 0, 360 * Math.PI / 180)
-      this.ctx.fill()
       this.ctx.closePath()
+      this.ctx.fill()
       this.ctx.restore()
     })
   }

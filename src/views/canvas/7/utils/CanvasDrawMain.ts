@@ -119,15 +119,15 @@ class CanvasDrawMain {
     this.list.forEach(item => {
       item.forEach(v => {
         this.ctx.save()
-        this.ctx.beginPath()
         this.ctx.textAlign = 'center'
         this.ctx.textBaseline = 'middle'
         this.ctx.font = `${v.fontSize}px 黑体`
         this.ctx.fillStyle = 'rgba(0,255,0,0.8)'
         // this.ctx.globalAlpha = v.opacity / 100
+        this.ctx.beginPath()
         this.ctx.fillText(v.text, v.x, v.y)
-        this.ctx.fill()
         this.ctx.closePath()
+        this.ctx.fill()
         this.ctx.restore()
       })
     })
