@@ -70,7 +70,7 @@ class CanvasDrawMain {
     const obj: any = {}
     let allLineHeight = 0
     this.options.mainTexts.forEach((text, index) => {
-      const prefectWordLength = 30 // 16比9的分辨率：一行展示30个字效果最佳
+      const prefectWordLength = 20 // 16比9的分辨率：一行展示30个字效果最佳
       obj[`fontSize${index}`] = (this.width - this.padding * 2) / prefectWordLength
       obj[`lineHeight${index}`] = obj[`fontSize${index}`] * 1.6
       allLineHeight += obj[`lineHeight${index}`]
@@ -122,6 +122,14 @@ class CanvasDrawMain {
         this.list.push(obj)
         obj = {}
       }
+    })
+
+    this.list.forEach((v) => {
+      // v.r = v['0']
+      // v.g = v['1']
+      // v.b = v['2']
+      v.w = 1
+      v.h = 1
     })
   }
 
@@ -180,10 +188,10 @@ class CanvasDrawMain {
   }
 
   drawMain () {
-    this.list.forEach((v, i) => {
+    this.list.forEach((v) => {
       this.ctx.save()
-      this.ctx.fillStyle = `rgba(0, 255, 0, 1)`
-      this.ctx.fillRect(v.x, v.y, 1, 1)
+      this.ctx.fillStyle = `rgba(${v.r}, ${v.g}, ${v.b}, 1)`
+      this.ctx.fillRect(v.x, v.y, v.w, v.h)
       this.ctx.restore()
     })
   }
@@ -197,9 +205,14 @@ class CanvasDrawMain {
     const changAngleTrigger = () => {
       this.timer1 = requestAnimationFrame(() => {
         console.log('changAngleTrigger：')
+        this.list.forEach((v) => {
+          v.r = randomNum(Math.floor(255))
+          v.g = randomNum(Math.floor(255))
+          v.b = randomNum(Math.floor(255))
+        })
         x++
         if (x % 10 === 0) {
-          this.audios[x % this.audioMax].play()
+          // this.audios[x % this.audioMax].play()
           i++
         }
         this.draw()
