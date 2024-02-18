@@ -57,7 +57,7 @@ class CanvasDrawMain {
     this.circle = {
       x: this.centerX,
       y: this.centerY,
-      r: this.height / 10
+      r: this.height / 20
     }
   }
 
@@ -122,7 +122,7 @@ class CanvasDrawMain {
   drawMain () {
     this.list.forEach((v) => {
       this.ctx.save()
-      this.ctx.strokeStyle = `rgba(0, 255, 0, 1)`
+      this.ctx.strokeStyle = `rgba(${randomNum(255)}, ${randomNum(255)}, ${randomNum(255)}, 0.4)`
       this.ctx.beginPath()
       this.ctx.moveTo(v.x, v.y)
       this.ctx.lineTo(this.circle.x, this.circle.y)
@@ -132,7 +132,7 @@ class CanvasDrawMain {
     })
 
     this.ctx.save()
-    this.ctx.fillStyle = `rgba(0, 255, 0, 1)`
+    this.ctx.fillStyle = `rgba(${randomNum(255)}, ${randomNum(255)}, ${randomNum(255)}, 0.8)`
     this.ctx.beginPath()
     this.ctx.arc(this.circle.x, this.circle.y, this.circle.r, 0, 360 * Math.PI / 180)
     this.ctx.closePath()
@@ -145,11 +145,13 @@ class CanvasDrawMain {
     cancelAnimationFrame(this.timer1)
 
     let j1 = 0
-    let x1 = Math.floor(this.width / 50)
-    let y1 = Math.floor(this.height / 50)
+    let x1 = Math.floor(this.width / 100)
+    let y1 = Math.floor(this.height / 100)
 
     const fnJ1 = (x, y) => {
-      this.list.push({ x, y })
+      if (this.list.length <= Math.floor(this.height / 2)) {
+        this.list.push({ x, y })
+      }
       j1++
       this.audios[j1 % this.audioMax].play()
     }
@@ -174,6 +176,20 @@ class CanvasDrawMain {
         this.circle.x += x1
         this.circle.y += y1
         this.draw()
+        if (j1 % 60 === 0) {
+          const x = 1 || randomNum(2)
+          const y = 1 || randomNum(2)
+          if (x1 > 0) {
+            x1 += x
+          } else {
+            x1 -= x
+          }
+          if (y1 > 0) {
+            y1 += y
+          } else {
+            y1 -= y
+          }
+        }
         changAngleTrigger()
       })
     }
