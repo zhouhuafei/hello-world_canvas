@@ -120,6 +120,17 @@ class CanvasDrawMain {
   }
 
   drawMain () {
+    this.list.forEach((v) => {
+      this.ctx.save()
+      this.ctx.strokeStyle = `rgba(0, 255, 0, 1)`
+      this.ctx.beginPath()
+      this.ctx.moveTo(v.x, v.y)
+      this.ctx.lineTo(this.circle.x, this.circle.y)
+      this.ctx.closePath()
+      this.ctx.stroke()
+      this.ctx.restore()
+    })
+
     this.ctx.save()
     this.ctx.fillStyle = `rgba(0, 255, 0, 1)`
     this.ctx.beginPath()
@@ -127,13 +138,6 @@ class CanvasDrawMain {
     this.ctx.closePath()
     this.ctx.fill()
     this.ctx.restore()
-
-    // this.list.forEach((v) => {
-    //   this.ctx.save()
-    //   this.ctx.fillStyle = `rgba(${v.r}, ${v.g}, ${v.b}, 1)`
-    //   this.ctx.fillRect(v.x, v.y, v.w, v.h)
-    //   this.ctx.restore()
-    // })
   }
 
   moveMain () {
@@ -144,8 +148,8 @@ class CanvasDrawMain {
     let x1 = Math.floor(this.width / 50)
     let y1 = Math.floor(this.height / 50)
 
-    const fnJ1 = () => {
-      this.list.push()
+    const fnJ1 = (x, y) => {
+      this.list.push({ x, y })
       j1++
       this.audios[j1 % this.audioMax].play()
     }
@@ -154,17 +158,17 @@ class CanvasDrawMain {
       this.timer1 = requestAnimationFrame(() => {
         console.log('changAngleTrigger：')
         if (this.circle.x + this.circle.r >= this.width) {
-          fnJ1()
+          fnJ1(this.circle.x + this.circle.r, this.circle.y)
           x1 = -Math.abs(x1)
         } else if (this.circle.x - this.circle.r <= 0) {
-          fnJ1()
+          fnJ1(this.circle.x - this.circle.r, this.circle.y)
           x1 = Math.abs(x1)
         }
         if (this.circle.y + this.circle.r >= this.height) {
-          fnJ1()
+          fnJ1(this.circle.x, this.circle.y + this.circle.r)
           y1 = -Math.abs(y1)
         } else if (this.circle.y - this.circle.r <= 0) {
-          fnJ1()
+          fnJ1(this.circle.x, this.circle.y - this.circle.r)
           y1 = Math.abs(y1)
         }
         this.circle.x += x1
