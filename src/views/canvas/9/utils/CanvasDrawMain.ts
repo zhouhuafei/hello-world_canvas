@@ -109,6 +109,8 @@ class CanvasDrawMain {
   }
 
   getParticleList () {
+    this.list = []
+
     const imageData = this.ctx.getImageData(0, 0, this.width, this.height)
     let obj: any = {}
     let j = 0
