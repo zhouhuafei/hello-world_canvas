@@ -58,7 +58,7 @@ class CanvasDrawMain {
       x: this.centerX,
       y: this.centerY,
       r: this.height / (16 * 2),
-      rgba: `rgba(0, 255, 0, 0.9)`
+      rgba: `rgba(0, 255, 0, 0.8)`
     }
   }
 
@@ -151,7 +151,7 @@ class CanvasDrawMain {
 
     const fnJ1 = (x, y) => {
       if (this.list.length <= Math.floor(this.height / 2)) {
-        this.list.push({ x, y, rgba: `rgba(${randomNum(255)}, ${randomNum(255)}, ${randomNum(255)}, 0.9)` })
+        this.list.push({ x, y, rgba: `rgba(${randomNum(255)}, ${randomNum(255)}, ${randomNum(255)}, 0.8)` })
       }
       j1++
       this.audios[j1 % this.audioMax].play()
