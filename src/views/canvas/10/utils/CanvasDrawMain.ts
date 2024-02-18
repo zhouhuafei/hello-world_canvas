@@ -177,7 +177,7 @@ class CanvasDrawMain {
         this.circle.x += x1
         this.circle.y += y1
         this.draw()
-        if (j1 % 120 === 0) {
+        if (j1 % 60 === 0) {
           const x = randomNum(2)
           const y = randomNum(2)
           if (Math.random() > 0.5) {
