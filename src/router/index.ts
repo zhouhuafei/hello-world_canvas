@@ -66,6 +66,11 @@ const router = createRouter({
           path: '10',
           name: 'canvas10', // 效果篇 - 小球碰撞效果1
           component: () => import('@/views/canvas/10/index.vue')
+        },
+        {
+          path: '11',
+          name: 'canvas10', // 3D篇 - 尝试绘制一个立方体
+          component: () => import('@/views/canvas/11/index.vue')
         }
       ]
     },
